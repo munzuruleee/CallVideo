@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 import com.ijiuqing.videocall.R;
 import com.ijiuqing.videocall.base.BaseActivity;
+import com.ijiuqing.videocall.common.Constant;
 
 
 public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener,
@@ -40,12 +41,17 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         if (mFragmentMan == null) {
             mFragmentMan = getSupportFragmentManager();
         }
-
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
+        Constant.navigationHeight = navigation.getHeight();
         FragmentTransaction transaction = mFragmentMan.beginTransaction();
         transaction.add(R.id.content, blank1Fragment).commit();
         displayFragment = blank1Fragment;
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
     }
 
     @Override
@@ -79,7 +85,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         if (displayFragment != to) {
             FragmentTransaction transaction = mFragmentMan.beginTransaction();
             transaction.setCustomAnimations(R.anim.slide_right_in, R.anim.slide_left_out);
-            transaction.replace(R.id.content, to).commit(); // 隐藏当前的fragment，add下一个到Activity中
+            if (!to.isAdded()) {    // 先判断是否被add过
+                transaction.hide(displayFragment).add(R.id.content, to).commit(); // 隐藏当前的fragment，add下一个到Activity中
+            } else {
+                transaction.hide(displayFragment).show(to).commit(); // 隐藏当前的fragment，显示下一个
+            }
             displayFragment = to;
         }
     }

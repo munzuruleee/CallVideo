@@ -4,7 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.ijiuqing.videocall.base.AGApplication;
 import com.ijiuqing.videocall.ui.MainActivity;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
@@ -15,11 +21,14 @@ import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
     private final static Logger log = LoggerFactory.getLogger(WXEntryActivity.class);
     private static final int RETURN_MSG_TYPE_LOGIN = 1;
     private static final int RETURN_MSG_TYPE_SHARE = 2;
-
+    public String code;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,13 +57,37 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
                 switch (resp.getType()) {
                     case RETURN_MSG_TYPE_LOGIN:
                         //拿到了微信返回的code,立马再去请求access_token
-                        String code = ((SendAuth.Resp) resp).code;
+                        code = ((SendAuth.Resp) resp).code;
                         log.error("code = " + code);
-                        //就在这个地方，用网络库什么的或者自己封的网络api，发请求去咯，注意是get请求
-                        // TODO: 2017/8/22
-                        Intent intent = new Intent(WXEntryActivity.this, MainActivity.class);
-                        intent.putExtra("code", code);
-                        startActivity(intent);
+                        new Thread() {
+                            @Override
+                            public void run() {
+                                super.run();
+                                StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                                        "http://onpay.tpddns.cn:81/userInfo/getUser", new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
+                                    }
+                                }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+
+                                    }
+                                }) {
+                                    @Override
+                                    protected Map<String, String> getParams() throws AuthFailureError {
+                                        Map<String, String> Params = new HashMap<String, String>();
+                                        Params.put("code", code);
+                                        return Params;
+                                    }
+                                };
+                                AGApplication.mQueue.add(stringRequest);
+                            }
+                        }.start();
+//                        Intent intent = new Intent(WXEntryActivity.this, MainActivity.class);
+//                        intent.putExtra("code", code);
+//                        startActivity(intent);
                         finish();
                         break;
 

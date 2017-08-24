@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 
 import com.ijiuqing.videocall.R;
 import com.ijiuqing.videocall.common.AppConfig;
+import com.ijiuqing.videocall.common.ConstantApp;
 
 import java.nio.ByteBuffer;
 
@@ -43,6 +44,12 @@ public class PGSkinUtils {
     public PGSkinUtils(Context context) {
         mContext = context;
         mPGSkinUtils = new PGPrettifySDK(context, AppConfig.IS_USE_INDEPENDENT_THREAD);
+        mPinkValue = (float) SharedPreferencesUtils.getParam(mContext, ConstantApp.PINKVALUE, 0.4f);
+        mWhitenValue = (float) SharedPreferencesUtils.getParam(mContext, ConstantApp.WHITENVALUE, 0.4f);
+        mReddenValue = (float) SharedPreferencesUtils.getParam(mContext, ConstantApp.REDDENVALUE, 0.4f);
+        mSoftenValue = (int) SharedPreferencesUtils.getParam(mContext, ConstantApp.SOFTENVALUE, 70);
+        mFilterStrength = (int) SharedPreferencesUtils.getParam(mContext, ConstantApp.FILTERVALUE, 100);
+        mFilterName = (String) SharedPreferencesUtils.getParam(mContext, ConstantApp.CURFILTERSTRENGTH, "Deep");
     }
 
     public void setCameraInfo(CameraInfo cameraInfo) {

@@ -12,6 +12,24 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\eu.the4thfloor.volley\com.android.volley\2015.05.28\b0b08cc0ac897e596abe6b263a9507cba875b705\com.android.volley-2015.05.28.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b0b08cc0ac897e596abe6b263a9507cba875b705">
+        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\pre-dexed\original\release\com.android.volley-2015.05.28_c6370b5044be90158f474fc6fb3579fca2216951.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\eu.the4thfloor.volley\com.android.volley\2015.05.28\b0b08cc0ac897e596abe6b263a9507cba875b705\com.android.volley-2015.05.28.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b0b08cc0ac897e596abe6b263a9507cba875b705">
+        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\transforms\dex\original\debug\folders\1000\10\com.android.volley-2015.05.28_c6370b5044be90158f474fc6fb3579fca2216951\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
         jar="E:\AndroidProject\CallVideo\app\libs\agora-rtc-sdk.jar"
         jumboMode="false"
         optimize="true"
@@ -56,6 +74,15 @@
         <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\pre-dexed\release\videoprp_b1070bf42669e925e3f1aa42f5d651148147f248.jar" />
     </item>
     <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.8.0\c4ba5371a29ac9b2ad6129b1d39ea38750043eff\gson-2.8.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c4ba5371a29ac9b2ad6129b1d39ea38750043eff">
+        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\pre-dexed\original\debug\gson-2.8.0_eca52502deb48db964b5e6d39d16c5eaa7bb0998.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="E:\AndroidProject\CallVideo\app\libs\videoprp.jar"
         jumboMode="true"
@@ -83,13 +110,31 @@
         <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\transforms\dex\original\debug\folders\1000\2\classes_68ca6446ef2b20ef8f8fbbe1a5a8be830e4830f0\classes.dex" />
     </item>
     <item
+        is-multidex="false"
+        jar="E:\AndroidProject\CallVideo\app\libs\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="1fe8dd4b00cfa9473e21338ef335be36d40a23cf">
+        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\pre-dexed\original\debug\classes_68ca6446ef2b20ef8f8fbbe1a5a8be830e4830f0.jar" />
+    </item>
+    <item
         is-multidex="true"
-        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.8.0\c4ba5371a29ac9b2ad6129b1d39ea38750043eff\gson-2.8.0.jar"
+        jar="C:\Users\Administrator\.android\build-cache\2767d57514d5e21a36c53ee1be2865ccba78c552\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="c4ba5371a29ac9b2ad6129b1d39ea38750043eff">
-        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\transforms\dex\original\debug\folders\1000\10\gson-2.8.0_eca52502deb48db964b5e6d39d16c5eaa7bb0998\classes.dex" />
+        sha1="27127cc4423d6b93330b5d377346c32c83c49f31">
+        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\transforms\dex\original\debug\folders\1000\10\classes_9a3eb3b2d5d6dfc1523a2bcaab8e239d6f3cae7b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Administrator\.android\build-cache\d190af4433912eb9bfb355c2d879503a615be890\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a8351f6fe3dd1bd3267b9899e6484ab62520666a">
+        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\transforms\dex\original\debug\folders\1000\10\classes_020f705c46d8d0ecb3b5cbb08fae0264b4d7adb9\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -97,7 +142,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="d39e551aecc5073b1f7122ae7a997bca4bafaf76">
+        sha1="e6f3c50cbe18824ab1436ec64f4d0a02a3c540e2">
         <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\transforms\dex\original\debug\folders\1000\10000\instant-run-bootstrap_5f80a7f26a979af2ddb8c54b7ed2d51d9332f4ab\classes.dex" />
     </item>
 

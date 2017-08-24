@@ -35,7 +35,6 @@ public class CameraUtils implements ICameraUtils {
         mCurrentCameraType = mCurrentCameraType == 0 ? 1 : 0;
         startCamera();
         startCameraPreview(mSurfaceTexture);
-
     }
 
     public int getCurrentOrientation() {

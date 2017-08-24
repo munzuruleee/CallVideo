@@ -2,6 +2,8 @@ package com.ijiuqing.videocall.base;
 
 import android.app.Application;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.ijiuqing.videocall.common.ConstantApp;
 import com.ijiuqing.videocall.model.WorkerThread;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -12,11 +14,17 @@ public class AGApplication extends Application {
 
     private WorkerThread mWorkerThread;
     private static IWXAPI api;
-
+    private static AGApplication agApplication = null;
+    public static RequestQueue mQueue;
+    public static AGApplication getApplication() {
+        return agApplication;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        agApplication = this;
+        mQueue = Volley.newRequestQueue(getApplicationContext());
         registToWX();
     }
 

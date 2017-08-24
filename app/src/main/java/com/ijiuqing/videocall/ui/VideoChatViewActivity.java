@@ -3,6 +3,7 @@ package com.ijiuqing.videocall.ui;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 
 import com.ijiuqing.videocall.R;
 import com.ijiuqing.videocall.base.BaseActivity;
+
 import io.agora.rtc.Constants;
 import io.agora.rtc.IRtcEngineEventHandler;
 import io.agora.rtc.RtcEngine;
@@ -68,9 +70,18 @@ public class VideoChatViewActivity extends BaseActivity {
 
     @Override
     protected void deInitUIandEvent() {
-        leaveChannel();
-        mRtcEngine.destroy();
-        mRtcEngine = null;
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        release();
     }
 
     private void initAgoraEngineAndJoinChannel() {
@@ -117,6 +128,7 @@ public class VideoChatViewActivity extends BaseActivity {
 
     // Tutorial Step 6
     public void onEncCallClicked(View view) {
+        release();
         finish();
     }
 
@@ -134,6 +146,7 @@ public class VideoChatViewActivity extends BaseActivity {
     private void setupVideoProfile() {
         mRtcEngine.enableVideo();
         mRtcEngine.setVideoProfile(Constants.VIDEO_PROFILE_360P, false);
+        mRtcEngine.isTextureEncodeSupported();
     }
 
     // Tutorial Step 3
@@ -153,15 +166,12 @@ public class VideoChatViewActivity extends BaseActivity {
     // Tutorial Step 5
     private void setupRemoteVideo(int uid) {
         FrameLayout container = (FrameLayout) findViewById(R.id.remote_video_view_container);
-
         if (container.getChildCount() >= 1) {
             return;
         }
-
         SurfaceView surfaceView = RtcEngine.CreateRendererView(getBaseContext());
         container.addView(surfaceView);
         mRtcEngine.setupRemoteVideo(new VideoCanvas(surfaceView, VideoCanvas.RENDER_MODE_ADAPTIVE, uid));
-
         surfaceView.setTag(uid); // for mark purpose
         View tipMsg = findViewById(R.id.quick_tips_when_use_agora_sdk); // optional UI
         tipMsg.setVisibility(View.GONE);
@@ -176,7 +186,6 @@ public class VideoChatViewActivity extends BaseActivity {
     private void onRemoteUserLeft() {
         FrameLayout container = (FrameLayout) findViewById(R.id.remote_video_view_container);
         container.removeAllViews();
-
         View tipMsg = findViewById(R.id.quick_tips_when_use_agora_sdk); // optional UI
         tipMsg.setVisibility(View.VISIBLE);
     }
@@ -184,12 +193,29 @@ public class VideoChatViewActivity extends BaseActivity {
     // Tutorial Step 10
     private void onRemoteUserVideoMuted(int uid, boolean muted) {
         FrameLayout container = (FrameLayout) findViewById(R.id.remote_video_view_container);
-
         SurfaceView surfaceView = (SurfaceView) container.getChildAt(0);
-
         Object tag = surfaceView.getTag();
         if (tag != null && (Integer) tag == uid) {
             surfaceView.setVisibility(muted ? View.GONE : View.VISIBLE);
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN) {
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                release();
+                finish();
+                return true;    //已处理
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void release() {
+        if (mRtcEngine == null) return;
+        leaveChannel();
+        mRtcEngine.destroy();
+        mRtcEngine = null;
     }
 }
