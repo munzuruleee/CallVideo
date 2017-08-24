@@ -1,0 +1,5 @@
+AppSecret:5e5d8214911ea1d5d58c6e4e5401bc64
+
+APP_ID = "wx39f0181d8f7b32ff";
+
+MD5:e45d6905aba87d93a3c4be50c7bcc00b

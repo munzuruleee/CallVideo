@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="E:\AndroidProject\CallVideo\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="265a84d6d6be749ef3c2040260d9a9d5b0db9c2a">
+        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_fac81a4ba5244de09665a2dc08d44cac52dbcce1\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidProject\CallVideo\app\libs\agora-rtc-sdk.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="05e496bbb59c911ef6c3c0e04728201cfc22c55d">
+        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\pre-dexed\release\agora-rtc-sdk_4fd0faf89b077ecdbc40f9c33183ec6b4eec4dfb.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="E:\AndroidProject\CallVideo\app\libs\agora-rtc-sdk.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="05e496bbb59c911ef6c3c0e04728201cfc22c55d">
+        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\transforms\dex\debug\folders\1000\2\agora-rtc-sdk_4fd0faf89b077ecdbc40f9c33183ec6b4eec4dfb\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="E:\AndroidProject\CallVideo\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_92400ff12ff485789e262544b48846a4fceef881\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.tencent.mm.opensdk\wechat-sdk-android-with-mta\1.0.2\d52a3b82b9efa2b247d9496c5b5bbc8ca1f93eab\wechat-sdk-android-with-mta-1.0.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d52a3b82b9efa2b247d9496c5b5bbc8ca1f93eab">
+        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\pre-dexed\debug\wechat-sdk-android-with-mta-1.0.2_142639a5c1893406edfd462360bf54fbffcc9802.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidProject\CallVideo\app\libs\videoprp.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a5d3431c37c127233fd585ca0681fb8a69b11f9d">
+        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\pre-dexed\release\videoprp_b1070bf42669e925e3f1aa42f5d651148147f248.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="E:\AndroidProject\CallVideo\app\libs\videoprp.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a5d3431c37c127233fd585ca0681fb8a69b11f9d">
+        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\transforms\dex\debug\folders\1000\2\videoprp_b1070bf42669e925e3f1aa42f5d651148147f248\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="E:\AndroidProject\CallVideo\app\build\intermediates\incremental-runtime-classes\original\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\transforms\dex\original\debug\folders\1000\10000\instant-run_7600b4aaf2060258badb8f66de9305b7d2b45153\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="E:\AndroidProject\CallVideo\app\libs\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="1fe8dd4b00cfa9473e21338ef335be36d40a23cf">
+        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\transforms\dex\original\debug\folders\1000\2\classes_68ca6446ef2b20ef8f8fbbe1a5a8be830e4830f0\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.8.0\c4ba5371a29ac9b2ad6129b1d39ea38750043eff\gson-2.8.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c4ba5371a29ac9b2ad6129b1d39ea38750043eff">
+        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\transforms\dex\original\debug\folders\1000\10\gson-2.8.0_eca52502deb48db964b5e6d39d16c5eaa7bb0998\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="E:\AndroidProject\CallVideo\app\build\intermediates\incremental-classes\original\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d39e551aecc5073b1f7122ae7a997bca4bafaf76">
+        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\transforms\dex\original\debug\folders\1000\10000\instant-run-bootstrap_5f80a7f26a979af2ddb8c54b7ed2d51d9332f4ab\classes.dex" />
+    </item>
+
+</items>
