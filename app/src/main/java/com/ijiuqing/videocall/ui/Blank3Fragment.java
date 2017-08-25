@@ -7,8 +7,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.ijiuqing.videocall.R;
+import com.ijiuqing.videocall.common.Constant;
+import com.ijiuqing.videocall.common.ConstantApp;
+import com.ijiuqing.videocall.ui.view.ViewPrama;
+import com.ijiuqing.videocall.util.SharedPreferencesUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,7 +26,7 @@ import com.ijiuqing.videocall.R;
  * Use the {@link Blank3Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Blank3Fragment extends Fragment {
+public class Blank3Fragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -27,8 +35,14 @@ public class Blank3Fragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private View mView;
     private OnFragmentInteractionListener mListener;
+    private ImageView ivHeadPortrait;
+    private TextView tvNikeName;
+    private TextView tvDiamondNum;
+    private TextView tvTNum;
+    private TextView tvID;
+    private ImageView ivSex;
 
     public Blank3Fragment() {
         // Required empty public constructor
@@ -64,8 +78,21 @@ public class Blank3Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_blank3, container, false);
+        mView = inflater.inflate(R.layout.fragment_blank3, container, false);
+        initView(mView);
+        displayData();
+        return mView;
+    }
+
+    private void initView(View mView) {
+        FrameLayout content = (FrameLayout) mView.findViewById(R.id.content);
+        ViewPrama.setMargins(content, 0, 0, 0, Constant.navigationHeight);
+        ivHeadPortrait = (ImageView) mView.findViewById(R.id.head_portrait);
+        tvNikeName = (TextView) mView.findViewById(R.id.nike_name);
+        tvID = (TextView) mView.findViewById(R.id.id);
+        tvDiamondNum = (TextView) mView.findViewById(R.id.diamond_num);
+        tvTNum = (TextView) mView.findViewById(R.id.t_num);
+        ivSex = (ImageView) mView.findViewById(R.id.sex);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -87,9 +114,32 @@ public class Blank3Fragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    private void displayData() {
+        int sex = (int) SharedPreferencesUtils.getParam(getContext(), ConstantApp.ULSEX, 0);
+        String hiUrl = (String) SharedPreferencesUtils.getParam(getContext(), ConstantApp.UIHEADIMGURL, "");
+        tvID.setText((String) SharedPreferencesUtils.getParam(getContext(), ConstantApp.ULID, ""));
+        tvNikeName.setText((String) SharedPreferencesUtils.getParam(getContext(), ConstantApp.ULNICKNAME, ""));
+        if (sex == 1){
+            ivSex.setImageResource(R.drawable.sex_male);
+        }else {
+            ivSex.setImageResource(R.drawable.sex_female);
+        }
+        ImageLoader.getInstance().displayImage(hiUrl,ivHeadPortrait);
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 
     /**

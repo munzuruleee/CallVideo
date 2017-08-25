@@ -31,6 +31,7 @@ import com.ijiuqing.videocall.ui.view.HomeItemCell;
 import com.ijiuqing.videocall.ui.view.IRecycleCell;
 import com.ijiuqing.videocall.ui.view.MyItemClickListener;
 import com.ijiuqing.videocall.ui.view.MyRecycleAdapter;
+import com.ijiuqing.videocall.ui.view.ViewPrama;
 import com.ijiuqing.videocall.util.PreviewUtils;
 import com.ijiuqing.videocall.util.SharedPreferencesUtils;
 
@@ -121,19 +122,13 @@ public class Blank1Fragment extends Fragment implements SurfaceHolder.Callback, 
         return mView;
     }
 
-    public static void setMargins (View v, int l, int t, int r, int b) {
-        if (v.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
-            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
-            p.setMargins(l, t, r, b);
-            v.requestLayout();
-        }
-    }
+
 
     private void initView(View mView) {
         mSurfaceView = (SurfaceView) mView.findViewById(R.id.Preview);
         getPretty = (Button) mView.findViewById(R.id.get_pretty);
         prettyMenu = (LinearLayout) mView.findViewById(R.id.pretty_menu);
-        setMargins(prettyMenu,0,0,0,Constant.navigationHeight);
+        ViewPrama.setMargins(prettyMenu,0,0,0,Constant.navigationHeight);
         getPretty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

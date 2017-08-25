@@ -8,4 +8,7 @@
     <color name="dark_black">#CC262626</color>
     <color name="color_normalitem">#FF0000</color>
     <color name="color_selectedlitem">#303F9F</color>
+    <color name="colorPrimaryText">#ff000000</color>
+    <color name="colorMinorText">#ff323232</color>
+    <color name="colorDisabledText">#ffc8c8c8</color>
 </resources>

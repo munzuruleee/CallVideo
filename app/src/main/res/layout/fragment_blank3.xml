@@ -1,110 +1,195 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.ijiuqing.videocall.ui.Blank3Fragment">
 
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <!--<com.scwang.smartrefresh.layout.SmartRefreshLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
 
-        <android.support.v4.widget.NestedScrollView
-            android:id="@+id/nested_scrollview"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:fillViewport="true">
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nested_scrollview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_vertical"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/user_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/head_portrait"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/shape_corner"
+                android:src="@drawable/default_head_portrait" />
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" /><TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="3333" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="3333" />
+                    android:id="@+id/nike_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="昵称"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/sex_female" />
             </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ID号："
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@drawable/frame"
+                android:layout_height="90.0dip"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/diamond_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:src="@drawable/icon_profile_diamonds" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/diamond_icon"
+                    android:text="购买钻石"
+                    android:textColor="@color/colorMinorText"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_toRightOf="@id/diamond_icon" />
+
+                <TextView
+                    android:id="@+id/diamond_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/diamond_icon"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@id/diamond_icon"
+                    android:textColor="@color/colorDisabledText"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@color/colorDisabledText"/>
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:id="@+id/gain_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:src="@drawable/icon_profile_gains" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/gain_icon"
+                        android:text="我的收益"
+                        android:textColor="@color/colorMinorText"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_toRightOf="@id/gain_icon" />
+
+                    <TextView
+                        android:id="@+id/t_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/gain_icon"
+                        android:layout_marginLeft="16dp"
+                        android:layout_toRightOf="@id/gain_icon"
+                        android:textColor="@color/colorDisabledText"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="看过的人"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="邀请朋友得邀请券"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="邀请码输入"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="FAQ"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="如何赚钱"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="设置"/>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+    <!--</com.scwang.smartrefresh.layout.SmartRefreshLayout>-->
 </FrameLayout>

@@ -31,4 +31,17 @@ public class ConstantApp {
     public static final String SOFTENVALUE = "SOFTENVALUE";
     public static final String FILTERVALUE = "FILTERVALUE";
     public static final String CURFILTERSTRENGTH = "CURFILTERSTRENGTH";
+    public static final String ULID = "ULID";
+    public static final String ULPLATFROMID = "ULPLATFROMID";
+    public static final String ULAPPLYID = "ULAPPLYID";
+    public static final String UIHEADIMGURL = "UIHEADIMGURL";
+    public static final String ULNICKNAME = "ULNICKNAME";
+    public static final String ULSEX = "ULSEX";
+    public static final String ULPROVINCE = "ULPROVINCE";
+    public static final String ULCITY = "ULCITY";
+    public static final String ULCOUNTRY = "ULCOUNTRY";
+    public static final String ULSTATE = "ULSTATE";
+    public static final String LOGINFLAG = "LOGINFLAG";
+    public static final String CREATETIME = "CREATETIME";
+    public static final String MODIFYTIME = "MODIFYTIME";
 }
