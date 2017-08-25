@@ -12,6 +12,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\Administrator\.android\build-cache\d190af4433912eb9bfb355c2d879503a615be890\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a8351f6fe3dd1bd3267b9899e6484ab62520666a">
+        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\pre-dexed\original\release\classes_020f705c46d8d0ecb3b5cbb08fae0264b4d7adb9.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\eu.the4thfloor.volley\com.android.volley\2015.05.28\b0b08cc0ac897e596abe6b263a9507cba875b705\com.android.volley-2015.05.28.jar"
         jumboMode="false"
         optimize="true"
@@ -102,12 +111,30 @@
     </item>
     <item
         is-multidex="true"
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.nostra13.universalimageloader\universal-image-loader\1.9.5\442dbfb517b9ab5cb5c6da7ebf8cc28ec5bd0375\universal-image-loader-1.9.5.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="442dbfb517b9ab5cb5c6da7ebf8cc28ec5bd0375">
+        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\transforms\dex\original\debug\folders\1000\10\universal-image-loader-1.9.5_397e682f81a90ee78c74b4633dae79a7450f65cd\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="E:\AndroidProject\CallVideo\app\libs\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="1fe8dd4b00cfa9473e21338ef335be36d40a23cf">
         <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\transforms\dex\original\debug\folders\1000\2\classes_68ca6446ef2b20ef8f8fbbe1a5a8be830e4830f0\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.nostra13.universalimageloader\universal-image-loader\1.9.5\442dbfb517b9ab5cb5c6da7ebf8cc28ec5bd0375\universal-image-loader-1.9.5.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="442dbfb517b9ab5cb5c6da7ebf8cc28ec5bd0375">
+        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\pre-dexed\original\release\universal-image-loader-1.9.5_397e682f81a90ee78c74b4633dae79a7450f65cd.jar" />
     </item>
     <item
         is-multidex="false"
@@ -129,21 +156,30 @@
     </item>
     <item
         is-multidex="true"
+        jar="E:\AndroidProject\CallVideo\app\build\intermediates\incremental-classes\original\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="1aa8ae6eb8f3709f455dcaf6e11d646c443c7ff3">
+        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\transforms\dex\original\debug\folders\1000\10000\instant-run-bootstrap_5f80a7f26a979af2ddb8c54b7ed2d51d9332f4ab\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.android\build-cache\2767d57514d5e21a36c53ee1be2865ccba78c552\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="27127cc4423d6b93330b5d377346c32c83c49f31">
+        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\pre-dexed\original\release\classes_9a3eb3b2d5d6dfc1523a2bcaab8e239d6f3cae7b.jar" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\Administrator\.android\build-cache\d190af4433912eb9bfb355c2d879503a615be890\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="a8351f6fe3dd1bd3267b9899e6484ab62520666a">
         <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\transforms\dex\original\debug\folders\1000\10\classes_020f705c46d8d0ecb3b5cbb08fae0264b4d7adb9\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="E:\AndroidProject\CallVideo\app\build\intermediates\incremental-classes\original\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="e6f3c50cbe18824ab1436ec64f4d0a02a3c540e2">
-        <dex dex="E:\AndroidProject\CallVideo\app\build\intermediates\transforms\dex\original\debug\folders\1000\10000\instant-run-bootstrap_5f80a7f26a979af2ddb8c54b7ed2d51d9332f4ab\classes.dex" />
     </item>
 
 </items>
