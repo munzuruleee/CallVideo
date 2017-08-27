@@ -22,7 +22,7 @@ import java.util.Iterator;
 
 import com.ijiuqing.videocall.R;
 import com.ijiuqing.videocall.common.ConstantApp;
-import com.ijiuqing.videocall.model.VideoStatusData;
+import com.ijiuqing.videocall.entity.VideoStatusData;
 
 public class GridVideoViewContainerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final static Logger log = LoggerFactory.getLogger(GridVideoViewContainerAdapter.class);

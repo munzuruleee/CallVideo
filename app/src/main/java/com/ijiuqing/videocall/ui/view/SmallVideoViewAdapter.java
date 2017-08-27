@@ -5,12 +5,12 @@ import android.util.DisplayMetrics;
 import android.view.SurfaceView;
 import android.view.WindowManager;
 
+import com.ijiuqing.videocall.entity.VideoStatusData;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
-
-import com.ijiuqing.videocall.model.VideoStatusData;
 
 
 public class SmallVideoViewAdapter extends VideoViewAdapter {

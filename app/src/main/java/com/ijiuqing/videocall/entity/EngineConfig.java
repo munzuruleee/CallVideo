@@ -1,4 +1,4 @@
-package com.ijiuqing.videocall.model;
+package com.ijiuqing.videocall.entity;
 
 public class EngineConfig {
     public int mClientRole;
@@ -13,6 +13,6 @@ public class EngineConfig {
         mChannel = null;
     }
 
-    EngineConfig() {
+    public EngineConfig() {
     }
 }

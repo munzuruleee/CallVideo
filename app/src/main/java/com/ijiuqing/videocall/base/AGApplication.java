@@ -1,12 +1,11 @@
 package com.ijiuqing.videocall.base;
 
 import android.app.Application;
-import android.graphics.Bitmap;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.ijiuqing.videocall.common.ConstantApp;
-import com.ijiuqing.videocall.model.WorkerThread;
+import com.ijiuqing.videocall.work.WorkerThread;
 import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -15,11 +14,8 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
-import com.nostra13.universalimageloader.utils.StorageUtils;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-
-import java.io.File;
 
 
 public class AGApplication extends Application {

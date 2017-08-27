@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.ijiuqing.videocall.R;
-import com.ijiuqing.videocall.common.ItemData;
+import com.ijiuqing.videocall.entity.ItemData;
 
 
 

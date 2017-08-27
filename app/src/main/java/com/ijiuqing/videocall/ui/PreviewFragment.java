@@ -1,18 +1,14 @@
 package com.ijiuqing.videocall.ui;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.hardware.Camera;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -23,10 +19,11 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.ijiuqing.videocall.R;
+import com.ijiuqing.videocall.base.BaseFragment;
 import com.ijiuqing.videocall.common.AppConfig;
 import com.ijiuqing.videocall.common.Constant;
 import com.ijiuqing.videocall.common.ConstantApp;
-import com.ijiuqing.videocall.common.ItemData;
+import com.ijiuqing.videocall.entity.ItemData;
 import com.ijiuqing.videocall.ui.view.HomeItemCell;
 import com.ijiuqing.videocall.ui.view.IRecycleCell;
 import com.ijiuqing.videocall.ui.view.MyItemClickListener;
@@ -42,15 +39,13 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Blank1Fragment.OnFragmentInteractionListener} interface
+ * {@link PreviewFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Blank1Fragment#newInstance} factory method to
+ * Use the {@link PreviewFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Blank1Fragment extends Fragment implements SurfaceHolder.Callback, Camera.PreviewCallback
+public class PreviewFragment extends BaseFragment implements SurfaceHolder.Callback, Camera.PreviewCallback
         ,SeekBar.OnSeekBarChangeListener, MyItemClickListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private float mPinkValue = 0.4f;
@@ -61,7 +56,6 @@ public class Blank1Fragment extends Fragment implements SurfaceHolder.Callback, 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private OnFragmentInteractionListener mListener;
     private View mView;
     private PreviewUtils mPreviewUtils;
     private Context mContext;
@@ -75,7 +69,7 @@ public class Blank1Fragment extends Fragment implements SurfaceHolder.Callback, 
     private MyRecycleAdapter mAdapter;
     private List<IRecycleCell> mListData;
     private String mCurFilterStrength;
-    public Blank1Fragment() {
+    public PreviewFragment() {
         // Required empty public constructor
     }
 
@@ -85,11 +79,11 @@ public class Blank1Fragment extends Fragment implements SurfaceHolder.Callback, 
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Blank1Fragment.
+     * @return A new instance of fragment PreviewFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Blank1Fragment newInstance(String param1, String param2) {
-        Blank1Fragment fragment = new Blank1Fragment();
+    public static PreviewFragment newInstance(String param1, String param2) {
+        PreviewFragment fragment = new PreviewFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -115,16 +109,8 @@ public class Blank1Fragment extends Fragment implements SurfaceHolder.Callback, 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_blank1, container, false);
-        initView(mView);
-        return mView;
-    }
-
-
-
-    private void initView(View mView) {
+    protected void initView(View view, Bundle savedInstanceState) {
+        this.mView = view;
         mSurfaceView = (SurfaceView) mView.findViewById(R.id.Preview);
         getPretty = (Button) mView.findViewById(R.id.get_pretty);
         prettyMenu = (LinearLayout) mView.findViewById(R.id.pretty_menu);
@@ -179,6 +165,11 @@ public class Blank1Fragment extends Fragment implements SurfaceHolder.Callback, 
         mListView.setItemAnimator(new DefaultItemAnimator());
     }
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_preview;
+    }
+
     private void ConstructList() {
         mListData = new ArrayList<>();
         for (int i = 0; i < AppConfig.mFilterName.length; ++i) {
@@ -189,23 +180,6 @@ public class Blank1Fragment extends Fragment implements SurfaceHolder.Callback, 
         }
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
 
     @Override
     public void onStop() {
@@ -252,7 +226,6 @@ public class Blank1Fragment extends Fragment implements SurfaceHolder.Callback, 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
     @Override
@@ -260,6 +233,7 @@ public class Blank1Fragment extends Fragment implements SurfaceHolder.Callback, 
         mPreviewUtils.frameProcess(data, 0, mFirstFrame, false);//data 可以传空 根据TextureId进行美颜
         mFirstFrame = false;
     }
+
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
@@ -359,11 +333,5 @@ public class Blank1Fragment extends Fragment implements SurfaceHolder.Callback, 
     @Override
     public String getCurFilterType() {
         return mCurFilterStrength;
-    }
-
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }

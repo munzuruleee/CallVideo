@@ -25,9 +25,9 @@ import java.util.Arrays;
 import com.ijiuqing.videocall.BuildConfig;
 import com.ijiuqing.videocall.common.Constant;
 import com.ijiuqing.videocall.common.ConstantApp;
-import com.ijiuqing.videocall.model.EngineConfig;
-import com.ijiuqing.videocall.model.MyEngineEventHandler;
-import com.ijiuqing.videocall.model.WorkerThread;
+import com.ijiuqing.videocall.entity.EngineConfig;
+import com.ijiuqing.videocall.work.MyEngineEventHandler;
+import com.ijiuqing.videocall.work.WorkerThread;
 import io.agora.rtc.RtcEngine;
 
 public abstract class BaseActivity extends AppCompatActivity {

@@ -8,9 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 
-import java.util.HashMap;
+import com.ijiuqing.videocall.entity.VideoStatusData;
 
-import com.ijiuqing.videocall.model.VideoStatusData;
+import java.util.HashMap;
 
 
 public class GridVideoViewContainer extends RecyclerView {

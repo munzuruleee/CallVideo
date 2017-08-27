@@ -24,9 +24,9 @@ import java.util.HashMap;
 
 import com.ijiuqing.videocall.R;
 import com.ijiuqing.videocall.base.BaseActivity;
-import com.ijiuqing.videocall.model.AGEventHandler;
+import com.ijiuqing.videocall.entity.VideoStatusData;
+import com.ijiuqing.videocall.work.AGEventHandler;
 import com.ijiuqing.videocall.common.ConstantApp;
-import com.ijiuqing.videocall.model.VideoStatusData;
 import com.ijiuqing.videocall.ui.view.GridVideoViewContainer;
 import com.ijiuqing.videocall.ui.view.SmallVideoViewAdapter;
 import com.ijiuqing.videocall.ui.view.VideoViewEventListener;

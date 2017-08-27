@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.ijiuqing.videocall.R;
-import com.ijiuqing.videocall.model.VideoStatusData;
+import com.ijiuqing.videocall.entity.VideoStatusData;
 
 
 public abstract class VideoViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

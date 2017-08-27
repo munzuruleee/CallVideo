@@ -1,4 +1,4 @@
-package com.ijiuqing.videocall.common;
+package com.ijiuqing.videocall.entity;
 
 /**
  * Created by PC-Xu on 2017/1/5.

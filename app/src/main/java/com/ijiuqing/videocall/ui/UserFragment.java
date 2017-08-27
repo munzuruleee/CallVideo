@@ -1,17 +1,15 @@
 package com.ijiuqing.videocall.ui;
 
-import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ijiuqing.videocall.R;
+import com.ijiuqing.videocall.base.BaseFragment;
 import com.ijiuqing.videocall.common.Constant;
 import com.ijiuqing.videocall.common.ConstantApp;
 import com.ijiuqing.videocall.ui.view.ViewPrama;
@@ -21,22 +19,17 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Blank3Fragment.OnFragmentInteractionListener} interface
+ * {@link UserFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Blank3Fragment#newInstance} factory method to
+ * Use the {@link UserFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Blank3Fragment extends Fragment implements View.OnClickListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class UserFragment extends BaseFragment implements View.OnClickListener {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     private View mView;
-    private OnFragmentInteractionListener mListener;
     private ImageView ivHeadPortrait;
     private TextView tvNikeName;
     private TextView tvDiamondNum;
@@ -44,21 +37,12 @@ public class Blank3Fragment extends Fragment implements View.OnClickListener {
     private TextView tvID;
     private ImageView ivSex;
 
-    public Blank3Fragment() {
+    public UserFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Blank3Fragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Blank3Fragment newInstance(String param1, String param2) {
-        Blank3Fragment fragment = new Blank3Fragment();
+    public static UserFragment newInstance(String param1, String param2) {
+        UserFragment fragment = new UserFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -76,15 +60,18 @@ public class Blank3Fragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_blank3, container, false);
-        initView(mView);
+    protected void initView(View view, Bundle savedInstanceState) {
+        initView(view);
         displayData();
-        return mView;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_user;
     }
 
     private void initView(View mView) {
+        this.mView = mView;
         FrameLayout content = (FrameLayout) mView.findViewById(R.id.content);
         ViewPrama.setMargins(content, 0, 0, 0, Constant.navigationHeight);
         ivHeadPortrait = (ImageView) mView.findViewById(R.id.head_portrait);
@@ -93,29 +80,13 @@ public class Blank3Fragment extends Fragment implements View.OnClickListener {
         tvDiamondNum = (TextView) mView.findViewById(R.id.diamond_num);
         tvTNum = (TextView) mView.findViewById(R.id.t_num);
         ivSex = (ImageView) mView.findViewById(R.id.sex);
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
+        TextView setting = (TextView) mView.findViewById(R.id.setting);
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(),VideoChatViewActivity.class));
+            }
+        });
     }
 
     private void displayData() {
@@ -132,28 +103,7 @@ public class Blank3Fragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    @Override
     public void onClick(View v) {
 
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }

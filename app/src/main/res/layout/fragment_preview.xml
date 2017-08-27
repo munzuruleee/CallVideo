@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ijiuqing.videocall.ui.Blank1Fragment">
+    tools:context="com.ijiuqing.videocall.ui.PreviewFragment">
 
     <SurfaceView
         android:id="@+id/Preview"

@@ -1,6 +1,7 @@
 package com.ijiuqing.videocall.ui;
 
 import android.graphics.PorterDuff;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -8,22 +9,31 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.ijiuqing.videocall.R;
 import com.ijiuqing.videocall.base.BaseActivity;
+import com.ijiuqing.videocall.work.CountDownCallBack;
+import com.ijiuqing.videocall.work.CountDownTask;
 
 import io.agora.rtc.Constants;
 import io.agora.rtc.IRtcEngineEventHandler;
 import io.agora.rtc.RtcEngine;
 import io.agora.rtc.video.VideoCanvas;
 
-public class VideoChatViewActivity extends BaseActivity {
+public class VideoChatViewActivity extends BaseActivity implements CountDownCallBack{
 
     private static final String LOG_TAG = VideoChatViewActivity.class.getSimpleName();
-
     private static final int PERMISSION_REQ_ID_RECORD_AUDIO = 22;
     private static final int PERMISSION_REQ_ID_CAMERA = PERMISSION_REQ_ID_RECORD_AUDIO + 1;
-
+    FrameLayout containerLocal;
+    FrameLayout containerRemote;
+    SurfaceView suvRemote;
+    SurfaceView suvLocal;
+    TextView txv;
+    LinearLayout wait;
+    boolean isSwitchFlag = false;
     private RtcEngine mRtcEngine;// Tutorial Step 1
     private final IRtcEngineEventHandler mRtcEventHandler = new IRtcEngineEventHandler() { // Tutorial Step 1
         @Override
@@ -32,6 +42,7 @@ public class VideoChatViewActivity extends BaseActivity {
                 @Override
                 public void run() {
                     setupRemoteVideo(uid);
+                    wait.setVisibility(View.GONE);
                 }
             });
         }
@@ -55,6 +66,11 @@ public class VideoChatViewActivity extends BaseActivity {
                 }
             });
         }
+
+        @Override
+        public void onFirstLocalVideoFrame(int width, int height, int elapsed) {
+            super.onFirstLocalVideoFrame(width, height, elapsed);
+        }
     };
 
     @Override
@@ -66,6 +82,34 @@ public class VideoChatViewActivity extends BaseActivity {
     @Override
     protected void initUIandEvent() {
         initAgoraEngineAndJoinChannel();
+        containerLocal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switchView();
+            }
+        });
+        txv = (TextView) findViewById(R.id.timer);
+        wait = (LinearLayout) findViewById(R.id.wait);
+    }
+
+    private void switchView() {
+        containerLocal.removeAllViews();
+        containerRemote.removeAllViews();
+        if (suvLocal != null) {
+            if (!isSwitchFlag) {
+                containerRemote.addView(suvLocal);
+            } else {
+                containerLocal.addView(suvLocal);
+            }
+        }
+        if (suvRemote != null) {
+            if (!isSwitchFlag) {
+                containerLocal.addView(suvRemote);
+            } else {
+                containerRemote.addView(suvRemote);
+            }
+        }
+        isSwitchFlag = !isSwitchFlag;
     }
 
     @Override
@@ -85,6 +129,8 @@ public class VideoChatViewActivity extends BaseActivity {
     }
 
     private void initAgoraEngineAndJoinChannel() {
+        containerLocal = (FrameLayout) findViewById(R.id.local_video_view_container);
+        containerRemote = (FrameLayout) findViewById(R.id.remote_video_view_container);
         initializeAgoraEngine();     // Tutorial Step 1
         setupVideoProfile();         // Tutorial Step 2
         setupLocalVideo();           // Tutorial Step 3
@@ -102,8 +148,8 @@ public class VideoChatViewActivity extends BaseActivity {
             iv.setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
         }
         mRtcEngine.muteLocalVideoStream(iv.isSelected());
-        FrameLayout container = (FrameLayout) findViewById(R.id.local_video_view_container);
-        SurfaceView surfaceView = (SurfaceView) container.getChildAt(0);
+        containerLocal = (FrameLayout) findViewById(R.id.local_video_view_container);
+        SurfaceView surfaceView = (SurfaceView) containerLocal.getChildAt(0);
         surfaceView.setZOrderMediaOverlay(!iv.isSelected());
         surfaceView.setVisibility(iv.isSelected() ? View.GONE : View.VISIBLE);
     }
@@ -151,30 +197,30 @@ public class VideoChatViewActivity extends BaseActivity {
 
     // Tutorial Step 3
     private void setupLocalVideo() {
-        FrameLayout container = (FrameLayout) findViewById(R.id.local_video_view_container);
-        SurfaceView surfaceView = RtcEngine.CreateRendererView(getBaseContext());
-        surfaceView.setZOrderMediaOverlay(true);
-        container.addView(surfaceView);
-        mRtcEngine.setupLocalVideo(new VideoCanvas(surfaceView, VideoCanvas.RENDER_MODE_ADAPTIVE, 0));
+        suvLocal = RtcEngine.CreateRendererView(getBaseContext());
+        suvLocal.setZOrderMediaOverlay(true);
+        containerLocal.addView(suvLocal);
+        mRtcEngine.setupLocalVideo(new VideoCanvas(suvLocal, VideoCanvas.RENDER_MODE_ADAPTIVE, 0));
     }
 
     // Tutorial Step 4
     private void joinChannel() {
-        mRtcEngine.joinChannel(null, "abacd", "Extra Optional Data", 0); // if you do not specify the uid, we will generate the uid for you
+        mRtcEngine.joinChannel(null, "demoChannel1", "Extra Optional Data", 0); // if you do not specify the uid, we will generate the uid for you
     }
 
     // Tutorial Step 5
     private void setupRemoteVideo(int uid) {
-        FrameLayout container = (FrameLayout) findViewById(R.id.remote_video_view_container);
-        if (container.getChildCount() >= 1) {
+        if (containerRemote.getChildCount() >= 1) {
             return;
         }
-        SurfaceView surfaceView = RtcEngine.CreateRendererView(getBaseContext());
-        container.addView(surfaceView);
-        mRtcEngine.setupRemoteVideo(new VideoCanvas(surfaceView, VideoCanvas.RENDER_MODE_ADAPTIVE, uid));
-        surfaceView.setTag(uid); // for mark purpose
+        suvRemote = RtcEngine.CreateRendererView(getBaseContext());
+        containerRemote.addView(suvRemote);
+        mRtcEngine.setupRemoteVideo(new VideoCanvas(suvRemote, VideoCanvas.RENDER_MODE_ADAPTIVE, uid));
+        suvRemote.setTag(uid); // for mark purpose
         View tipMsg = findViewById(R.id.quick_tips_when_use_agora_sdk); // optional UI
         tipMsg.setVisibility(View.GONE);
+        // TODO: 17/8/27
+        new CountDownTask(this).execute();
     }
 
     // Tutorial Step 6
@@ -217,5 +263,24 @@ public class VideoChatViewActivity extends BaseActivity {
         leaveChannel();
         mRtcEngine.destroy();
         mRtcEngine = null;
+    }
+
+    @Override
+    public void onProgressUpdate(int second, boolean isFree) {
+        if (isFree) {
+            txv.setText("免费时间"+second+"s");
+        }else {
+            txv.setText("付费时间"+second+"s");
+        }
+    }
+
+    @Override
+    public void onPostExecute() {
+        finish();
+    }
+
+    @Override
+    public void onCancelled() {
+
     }
 }

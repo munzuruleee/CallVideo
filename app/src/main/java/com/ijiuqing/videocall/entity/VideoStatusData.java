@@ -1,4 +1,4 @@
-package com.ijiuqing.videocall.model;
+package com.ijiuqing.videocall.entity;
 
 import android.view.SurfaceView;
 

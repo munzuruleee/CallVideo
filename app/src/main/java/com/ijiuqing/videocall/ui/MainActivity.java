@@ -1,7 +1,6 @@
 package com.ijiuqing.videocall.ui;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -14,16 +13,16 @@ import android.view.MenuItem;
 
 import com.ijiuqing.videocall.R;
 import com.ijiuqing.videocall.base.BaseActivity;
+import com.ijiuqing.videocall.base.BaseFragment;
 import com.ijiuqing.videocall.common.Constant;
 
 
-public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener,
-        Blank1Fragment.OnFragmentInteractionListener,
-        Blank2Fragment.OnFragmentInteractionListener,
-        Blank3Fragment.OnFragmentInteractionListener {
-    Blank1Fragment blank1Fragment;
-    Blank2Fragment blank2Fragment;
-    Blank3Fragment blank3Fragment;
+public class MainActivity extends BaseActivity implements
+        BottomNavigationView.OnNavigationItemSelectedListener,
+        BaseFragment.OnFragmentInteractionListener{
+    PreviewFragment previewFragment;
+    CamGirlFragment camGirlFragment;
+    UserFragment userFragment;
     Fragment displayFragment;
     FragmentManager mFragmentMan;
 
@@ -35,9 +34,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     protected void initUIandEvent() {
-        blank1Fragment = new Blank1Fragment();
-        blank2Fragment = new Blank2Fragment();
-        blank3Fragment = new Blank3Fragment();
+        previewFragment = new PreviewFragment();
+        camGirlFragment = new CamGirlFragment();
+        userFragment = new UserFragment();
         if (mFragmentMan == null) {
             mFragmentMan = getSupportFragmentManager();
         }
@@ -45,8 +44,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         navigation.setOnNavigationItemSelectedListener(this);
         Constant.navigationHeight = navigation.getHeight();
         FragmentTransaction transaction = mFragmentMan.beginTransaction();
-        transaction.add(R.id.content, blank1Fragment).commit();
-        displayFragment = blank1Fragment;
+        transaction.add(R.id.content, previewFragment).commit();
+        displayFragment = previewFragment;
     }
 
     @Override
@@ -95,7 +94,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void onFragmentInteraction(String uri) {
 
     }
 
@@ -103,22 +102,22 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.module1:
-                if (blank1Fragment == null) {
-                    blank1Fragment = new Blank1Fragment();
+                if (previewFragment == null) {
+                    previewFragment = new PreviewFragment();
                 }
-                switchContent(blank1Fragment);
+                switchContent(previewFragment);
                 break;
             case R.id.module2:
-                if (blank2Fragment == null) {
-                    blank2Fragment = new Blank2Fragment();
+                if (camGirlFragment == null) {
+                    camGirlFragment = new CamGirlFragment();
                 }
-                switchContent(blank2Fragment);
+                switchContent(camGirlFragment);
                 break;
             case R.id.module3:
-                if (blank3Fragment == null) {
-                    blank3Fragment = new Blank3Fragment();
+                if (userFragment == null) {
+                    userFragment = new UserFragment();
                 }
-                switchContent(blank3Fragment);
+                switchContent(userFragment);
                 break;
             default:
                 break;

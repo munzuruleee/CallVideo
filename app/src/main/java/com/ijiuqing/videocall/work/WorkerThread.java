@@ -1,4 +1,4 @@
-package com.ijiuqing.videocall.model;
+package com.ijiuqing.videocall.work;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -20,6 +20,8 @@ import java.io.File;
 import com.ijiuqing.videocall.R;
 import com.ijiuqing.videocall.common.Constant;
 import com.ijiuqing.videocall.common.ConstantApp;
+import com.ijiuqing.videocall.entity.EngineConfig;
+
 import io.agora.rtc.Constants;
 import io.agora.rtc.RtcEngine;
 import io.agora.rtc.video.VideoCanvas;

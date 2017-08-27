@@ -1,4 +1,4 @@
-package com.ijiuqing.videocall.model;
+package com.ijiuqing.videocall.work;
 
 public interface AGEventHandler {
     void onFirstRemoteVideoDecoded(int uid, int width, int height, int elapsed);
