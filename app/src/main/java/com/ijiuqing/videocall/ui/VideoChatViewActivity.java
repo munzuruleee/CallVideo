@@ -10,10 +10,13 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.ijiuqing.videocall.R;
 import com.ijiuqing.videocall.base.BaseActivity;
+import com.ijiuqing.videocall.common.ConstantApp;
+import com.ijiuqing.videocall.util.SharedPreferencesUtils;
 import com.ijiuqing.videocall.work.CountDownCallBack;
 import com.ijiuqing.videocall.work.CountDownTask;
 
@@ -21,8 +24,10 @@ import io.agora.rtc.Constants;
 import io.agora.rtc.IRtcEngineEventHandler;
 import io.agora.rtc.RtcEngine;
 import io.agora.rtc.video.VideoCanvas;
+import io.agora.videoprp.AgoraYuvEnhancer;
 
-public class VideoChatViewActivity extends BaseActivity implements CountDownCallBack{
+public class VideoChatViewActivity extends BaseActivity implements CountDownCallBack
+        , SeekBar.OnSeekBarChangeListener {
 
     private static final String LOG_TAG = VideoChatViewActivity.class.getSimpleName();
     private static final int PERMISSION_REQ_ID_RECORD_AUDIO = 22;
@@ -33,8 +38,11 @@ public class VideoChatViewActivity extends BaseActivity implements CountDownCall
     SurfaceView suvLocal;
     TextView txv;
     LinearLayout wait;
+    private float mWhitenValue = 0f;
+    private float mSoftenValue = 0f;
     boolean isSwitchFlag = false;
     private RtcEngine mRtcEngine;// Tutorial Step 1
+    private AgoraYuvEnhancer yuvEnhancer = null;
     private final IRtcEngineEventHandler mRtcEventHandler = new IRtcEngineEventHandler() { // Tutorial Step 1
         @Override
         public void onFirstRemoteVideoDecoded(final int uid, int width, int height, int elapsed) { // Tutorial Step 5
@@ -77,6 +85,7 @@ public class VideoChatViewActivity extends BaseActivity implements CountDownCall
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_chat_view);
+        yuvEnhancer = new AgoraYuvEnhancer(VideoChatViewActivity.this);
     }
 
     @Override
@@ -90,6 +99,16 @@ public class VideoChatViewActivity extends BaseActivity implements CountDownCall
         });
         txv = (TextView) findViewById(R.id.timer);
         wait = (LinearLayout) findViewById(R.id.wait);
+        SeekBar m_Seekwhiten = (SeekBar) findViewById(R.id.seek_whiten);
+        m_Seekwhiten.setOnSeekBarChangeListener(this);
+        m_Seekwhiten.setProgress((int) (mWhitenValue * 100));
+        TextView tv_whiten = (TextView) findViewById(R.id.whiten_value);
+        tv_whiten.setText(String.valueOf(mWhitenValue));
+        SeekBar m_Seeksoften = (SeekBar) findViewById(R.id.seek_soften);
+        m_Seeksoften.setOnSeekBarChangeListener(this);
+        m_Seeksoften.setProgress((int) mSoftenValue * 100);
+        TextView tv_soften = (TextView) findViewById(R.id.soften_value);
+        tv_soften.setText(String.valueOf(mSoftenValue));
     }
 
     private void switchView() {
@@ -201,6 +220,7 @@ public class VideoChatViewActivity extends BaseActivity implements CountDownCall
         suvLocal.setZOrderMediaOverlay(true);
         containerLocal.addView(suvLocal);
         mRtcEngine.setupLocalVideo(new VideoCanvas(suvLocal, VideoCanvas.RENDER_MODE_ADAPTIVE, 0));
+        yuvEnhancer.StartPreProcess();
     }
 
     // Tutorial Step 4
@@ -217,8 +237,6 @@ public class VideoChatViewActivity extends BaseActivity implements CountDownCall
         containerRemote.addView(suvRemote);
         mRtcEngine.setupRemoteVideo(new VideoCanvas(suvRemote, VideoCanvas.RENDER_MODE_ADAPTIVE, uid));
         suvRemote.setTag(uid); // for mark purpose
-        View tipMsg = findViewById(R.id.quick_tips_when_use_agora_sdk); // optional UI
-        tipMsg.setVisibility(View.GONE);
         // TODO: 17/8/27
         new CountDownTask(this).execute();
     }
@@ -232,8 +250,6 @@ public class VideoChatViewActivity extends BaseActivity implements CountDownCall
     private void onRemoteUserLeft() {
         FrameLayout container = (FrameLayout) findViewById(R.id.remote_video_view_container);
         container.removeAllViews();
-        View tipMsg = findViewById(R.id.quick_tips_when_use_agora_sdk); // optional UI
-        tipMsg.setVisibility(View.VISIBLE);
     }
 
     // Tutorial Step 10
@@ -259,6 +275,7 @@ public class VideoChatViewActivity extends BaseActivity implements CountDownCall
     }
 
     private void release() {
+        if (yuvEnhancer != null) yuvEnhancer.StopPreProcess();
         if (mRtcEngine == null) return;
         leaveChannel();
         mRtcEngine.destroy();
@@ -268,9 +285,9 @@ public class VideoChatViewActivity extends BaseActivity implements CountDownCall
     @Override
     public void onProgressUpdate(int second, boolean isFree) {
         if (isFree) {
-            txv.setText("免费时间"+second+"s");
-        }else {
-            txv.setText("付费时间"+second+"s");
+            txv.setText("免费时间" + second + "s");
+        } else {
+            txv.setText("付费时间" + second + "s");
         }
     }
 
@@ -281,6 +298,43 @@ public class VideoChatViewActivity extends BaseActivity implements CountDownCall
 
     @Override
     public void onCancelled() {
+
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        switch (seekBar.getId()) {
+
+            case R.id.seek_whiten: {
+                if (fromUser) {
+                    mWhitenValue = progress / 100f;
+                    yuvEnhancer.SetLighteningFactor(mWhitenValue);
+                    TextView tv_whiten = (TextView) findViewById(R.id.whiten_value);
+                    tv_whiten.setText(String.valueOf(mWhitenValue));
+                }
+            }
+            break;
+            case R.id.seek_soften: {
+                if (fromUser) {
+                    mSoftenValue = progress / 100f;
+                    yuvEnhancer.SetSmoothnessFactor(mSoftenValue);
+                    TextView tv_soften = (TextView) findViewById(R.id.soften_value);
+                    tv_soften.setText(String.valueOf(mSoftenValue));
+                }
+            }
+            break;
+        }
+        SharedPreferencesUtils.setParam(VideoChatViewActivity.this, ConstantApp.WHITENVALUE, mWhitenValue);
+        SharedPreferencesUtils.setParam(VideoChatViewActivity.this, ConstantApp.SOFTENVALUE, mSoftenValue);
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
 
     }
 }

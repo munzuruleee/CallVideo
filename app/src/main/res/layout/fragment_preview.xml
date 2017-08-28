@@ -2,9 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000"
     tools:context="com.ijiuqing.videocall.ui.PreviewFragment">
 
-    <SurfaceView
+    <FrameLayout
         android:id="@+id/Preview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
@@ -18,14 +19,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:visibility="gone"
         android:id="@+id/pretty_menu"
         android:layout_gravity="center_horizontal"
         android:orientation="vertical">
+        <!--android:visibility="gone"-->
 
         <LinearLayout android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:visibility="gone"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
@@ -89,6 +91,7 @@
         <LinearLayout android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:visibility="gone"
             android:orientation="horizontal"
             >
             <TextView
@@ -159,6 +162,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:visibility="gone"
                 android:text="滤镜强度"
                 android:textColor="#000000"/>
             <SeekBar
@@ -169,6 +173,7 @@
                 android:maxHeight="3.0dip"
                 android:minHeight="3.0dip"
                 android:paddingLeft="8dp"
+                android:visibility="gone"
                 android:paddingRight="8dp"
                 android:progressDrawable="@drawable/seekbar_bg"
                 android:thumb="@drawable/seekbar_thumb_selector"
@@ -178,12 +183,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:visibility="gone"
                 android:text="0.30"
                 android:textColor="#000000"/>
         </LinearLayout>
         <LinearLayout android:layout_width="match_parent"
             android:layout_height="65dp"
             android:gravity="center_vertical"
+            android:visibility="gone"
             android:orientation="horizontal">
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/listview"

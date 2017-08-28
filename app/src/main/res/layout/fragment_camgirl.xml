@@ -17,6 +17,8 @@
         <android.support.v7.widget.SearchView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:queryHint="只有你想不到的没有我搜不到的！"
+            android:backgroundTint="@color/agora_blue"
             android:layout_margin="5dp"/>
             <LinearLayout
                 android:layout_width="match_parent"

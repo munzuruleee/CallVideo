@@ -14,6 +14,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -35,6 +36,12 @@ import com.ijiuqing.videocall.util.SharedPreferencesUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.agora.rtc.Constants;
+import io.agora.rtc.IRtcEngineEventHandler;
+import io.agora.rtc.RtcEngine;
+import io.agora.rtc.video.VideoCanvas;
+import io.agora.videoprp.AgoraYuvEnhancer;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,22 +51,18 @@ import java.util.List;
  * Use the {@link PreviewFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PreviewFragment extends BaseFragment implements SurfaceHolder.Callback, Camera.PreviewCallback
-        ,SeekBar.OnSeekBarChangeListener, MyItemClickListener {
+public class PreviewFragment extends BaseFragment implements
+        SeekBar.OnSeekBarChangeListener, MyItemClickListener {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private float mPinkValue = 0.4f;
-    private float mWhitenValue = 0.7f;
-    private float mReddenValue = 0.5f;
-    private int mSoftenValue = 70;
-    private int mFilterValue = 100;
+    private float mWhitenValue = 0f;
+    private float mSoftenValue = 0f;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     private View mView;
     private PreviewUtils mPreviewUtils;
     private Context mContext;
-    private SurfaceView mSurfaceView;
     private boolean mFirstFrame = true;
     private Button getPretty;
     private LinearLayout prettyMenu;
@@ -69,6 +72,13 @@ public class PreviewFragment extends BaseFragment implements SurfaceHolder.Callb
     private MyRecycleAdapter mAdapter;
     private List<IRecycleCell> mListData;
     private String mCurFilterStrength;
+    private FrameLayout mFrameLayout;
+    private RtcEngine mRtcEngine;// Tutorial Step 1
+    private AgoraYuvEnhancer yuvEnhancer = null;
+    private SurfaceView mSurfaceView = null;
+    private final IRtcEngineEventHandler mRtcEventHandler = new IRtcEngineEventHandler() {
+    };
+
     public PreviewFragment() {
         // Required empty public constructor
     }
@@ -99,37 +109,28 @@ public class PreviewFragment extends BaseFragment implements SurfaceHolder.Callb
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         mContext = getContext();
-        mPreviewUtils = new PreviewUtils(getContext(), this);
-        mPinkValue = (float) SharedPreferencesUtils.getParam(mContext, ConstantApp.PINKVALUE, 0.4f);
-        mWhitenValue = (float) SharedPreferencesUtils.getParam(mContext, ConstantApp.WHITENVALUE, 0.4f);
-        mReddenValue = (float) SharedPreferencesUtils.getParam(mContext, ConstantApp.REDDENVALUE, 0.4f);
-        mSoftenValue = (int) SharedPreferencesUtils.getParam(mContext, ConstantApp.SOFTENVALUE, 70);
-        mFilterValue = (int) SharedPreferencesUtils.getParam(mContext, ConstantApp.FILTERVALUE, 100);
-        mCurFilterStrength = (String) SharedPreferencesUtils.getParam(mContext, ConstantApp.CURFILTERSTRENGTH, "Deep");
+        mWhitenValue = (float) SharedPreferencesUtils.getParam(mContext, ConstantApp.WHITENVALUE, 0f);
+        mSoftenValue = (float) SharedPreferencesUtils.getParam(mContext, ConstantApp.SOFTENVALUE, 0f);
+        yuvEnhancer = new AgoraYuvEnhancer(mContext);
     }
 
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
         this.mView = view;
-        mSurfaceView = (SurfaceView) mView.findViewById(R.id.Preview);
+        mFrameLayout = (FrameLayout) mView.findViewById(R.id.Preview);
         getPretty = (Button) mView.findViewById(R.id.get_pretty);
         prettyMenu = (LinearLayout) mView.findViewById(R.id.pretty_menu);
-        ViewPrama.setMargins(prettyMenu,0,0,0,Constant.navigationHeight);
+        ViewPrama.setMargins(prettyMenu, 0, 0, 0, Constant.navigationHeight);
         getPretty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (prettyMenu.getVisibility() == View.VISIBLE) {
                     prettyMenu.setVisibility(View.GONE);
-                }else {
+                } else {
                     prettyMenu.setVisibility(View.VISIBLE);
                 }
             }
         });
-        SeekBar m_Seekpink = (SeekBar) mView.findViewById(R.id.seek_pink);
-        m_Seekpink.setOnSeekBarChangeListener(this);
-        m_Seekpink.setProgress((int) (mPinkValue * 100));
-        TextView tv_pink = (TextView) mView.findViewById(R.id.pink_value);
-        tv_pink.setText(String.valueOf(mPinkValue));
 
         SeekBar m_Seekwhiten = (SeekBar) mView.findViewById(R.id.seek_whiten);
         m_Seekwhiten.setOnSeekBarChangeListener(this);
@@ -137,24 +138,11 @@ public class PreviewFragment extends BaseFragment implements SurfaceHolder.Callb
         TextView tv_whiten = (TextView) mView.findViewById(R.id.whiten_value);
         tv_whiten.setText(String.valueOf(mWhitenValue));
 
-        SeekBar m_Seekredden = (SeekBar) mView.findViewById(R.id.seek_redden);
-        m_Seekredden.setOnSeekBarChangeListener(this);
-        m_Seekredden.setProgress((int) (mReddenValue * 100));
-        TextView tv_redden = (TextView) mView.findViewById(R.id.redden_value);
-        tv_redden.setText(String.valueOf(mReddenValue));
-
-
         SeekBar m_Seeksoften = (SeekBar) mView.findViewById(R.id.seek_soften);
         m_Seeksoften.setOnSeekBarChangeListener(this);
-        m_Seeksoften.setProgress(mSoftenValue);
+        m_Seeksoften.setProgress((int) mSoftenValue * 100);
         TextView tv_soften = (TextView) mView.findViewById(R.id.soften_value);
         tv_soften.setText(String.valueOf(mSoftenValue));
-
-        SeekBar m_SeeksFilter = (SeekBar) mView.findViewById(R.id.filter_redden);
-        m_SeeksFilter.setOnSeekBarChangeListener(this);
-        m_SeeksFilter.setProgress(mFilterValue);
-        TextView tv_filter = (TextView) mView.findViewById(R.id.filter_value);
-        tv_filter.setText(String.valueOf(mFilterValue));
 
         mListView = (RecyclerView) mView.findViewById(R.id.listview);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(mListView.getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -163,6 +151,34 @@ public class PreviewFragment extends BaseFragment implements SurfaceHolder.Callb
         mAdapter = new MyRecycleAdapter(getActivity(), mListData);
         mListView.setAdapter(mAdapter);
         mListView.setItemAnimator(new DefaultItemAnimator());
+    }
+
+
+    // Tutorial Step 1
+    private void initializeAgoraEngine() {
+        try {
+            mRtcEngine = RtcEngine.create(getContext(), getString(R.string.private_app_id), mRtcEventHandler);
+        } catch (Exception e) {
+            Log.e("", Log.getStackTraceString(e));
+            throw new RuntimeException("NEED TO check rtc sdk init fatal error\n" + Log.getStackTraceString(e));
+        }
+    }
+
+    // Tutorial Step 2
+    private void setupVideoProfile() {
+        mRtcEngine.enableVideo();
+        mRtcEngine.setVideoProfile(Constants.VIDEO_PROFILE_480P_8, false);
+        mRtcEngine.isTextureEncodeSupported();
+    }
+
+    // Tutorial Step 3
+    private void setupLocalVideo() {
+        mFrameLayout.removeAllViews();
+        mSurfaceView = RtcEngine.CreateRendererView(getContext());
+        mSurfaceView.setZOrderMediaOverlay(true);
+        mFrameLayout.addView(mSurfaceView);
+        mRtcEngine.setupLocalVideo(new VideoCanvas(mSurfaceView, VideoCanvas.RENDER_MODE_ADAPTIVE, 0));
+        yuvEnhancer.StartPreProcess();
     }
 
     @Override
@@ -189,39 +205,30 @@ public class PreviewFragment extends BaseFragment implements SurfaceHolder.Callb
     @Override
     public void onPause() {
         super.onPause();
-        mPreviewUtils.pause();
-        mFirstFrame = true;
+        release();
+    }
+
+    private void release() {
+        if (yuvEnhancer != null) yuvEnhancer.StopPreProcess();
+        if (mRtcEngine == null) return;
+        mRtcEngine.destroy();
+        mRtcEngine = null;
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mPreviewUtils.freeRes();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mPreviewUtils.onresume();//启动照相机
-        reStartEngine();
-        // 注册方向回调，检测屏幕方向改变
+        initializeAgoraEngine();     // Tutorial Step 1
+        setupVideoProfile();         // Tutorial Step 2
+        setupLocalVideo();           // Tutorial Step 3
+        mRtcEngine.startPreview();
     }
 
-    public void reStartEngine() {
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        float fScreenHeight = displayMetrics.heightPixels;
-
-        int iLayoutHeight = (int) fScreenHeight;//- (int)(fScreenHeight * 0.2f);
-        int iLayoutWidth = (int) ((iLayoutHeight / (float) mPreviewUtils.getCameraWidth()) * mPreviewUtils.getCameraHeight());
-
-        mSurfaceView.getHolder().addCallback(this);
-
-        ViewGroup.LayoutParams surfaceLayout;
-        surfaceLayout = mSurfaceView.getLayoutParams();
-        surfaceLayout.width = iLayoutWidth;
-        surfaceLayout.height = iLayoutHeight;
-        mSurfaceView.setLayoutParams(surfaceLayout);
-    }
 
     @Override
     public void onDetach() {
@@ -229,81 +236,29 @@ public class PreviewFragment extends BaseFragment implements SurfaceHolder.Callb
     }
 
     @Override
-    public void onPreviewFrame(byte[] data, Camera camera) {
-        mPreviewUtils.frameProcess(data, 0, mFirstFrame, false);//data 可以传空 根据TextureId进行美颜
-        mFirstFrame = false;
-    }
-
-
-    @Override
-    public void surfaceCreated(SurfaceHolder holder) {
-        mPreviewUtils.startCameraPreview(holder);
-    }
-
-    @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        mPreviewUtils.setCameraInfo(width, height);
-    }
-
-    @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
-        Log.e("1", "1");
-    }
-
-    @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         switch (seekBar.getId()) {
-            case R.id.seek_pink: {
-                if (fromUser) {
-                    mPinkValue = progress / 100f;
-                    mPreviewUtils.SetSkinColor(mPinkValue, mWhitenValue, mReddenValue);
-                    TextView tv_pink = (TextView) mView.findViewById(R.id.pink_value);
-                    tv_pink.setText(String.valueOf(mPinkValue));
-                }
-            }
-            break;
             case R.id.seek_whiten: {
                 if (fromUser) {
                     mWhitenValue = progress / 100f;
-                    mPreviewUtils.SetSkinColor(mPinkValue, mWhitenValue, mReddenValue);
+                    yuvEnhancer.SetLighteningFactor(mWhitenValue);
                     TextView tv_whiten = (TextView) mView.findViewById(R.id.whiten_value);
                     tv_whiten.setText(String.valueOf(mWhitenValue));
-                }
-            }
-            break;
-            case R.id.seek_redden: {
-                if (fromUser) {
-                    mReddenValue = progress / 100f;
-                    mPreviewUtils.SetSkinColor(mPinkValue, mWhitenValue, mReddenValue);
-                    TextView tv_redden = (TextView) mView.findViewById(R.id.redden_value);
-                    tv_redden.setText(String.valueOf(mReddenValue));
-                }
-            }
-            break;
-            case R.id.filter_redden: {
-                if (fromUser) {
-                    mFilterValue = progress;
-                    mPreviewUtils.SetColorFilterStrength(mFilterValue);
-                    TextView tv_blur = (TextView) mView.findViewById(R.id.filter_value);
-                    tv_blur.setText(String.valueOf(mFilterValue));
+                    SharedPreferencesUtils.setParam(mContext, ConstantApp.WHITENVALUE, mWhitenValue);
                 }
             }
             break;
             case R.id.seek_soften: {
                 if (fromUser) {
-                    mSoftenValue = progress;
-                    mPreviewUtils.SetSkinSoftenStrength(mSoftenValue);
+                    mSoftenValue = progress / 100f;
+                    yuvEnhancer.SetSmoothnessFactor(mSoftenValue);
                     TextView tv_soften = (TextView) mView.findViewById(R.id.soften_value);
                     tv_soften.setText(String.valueOf(mSoftenValue));
+                    SharedPreferencesUtils.setParam(mContext, ConstantApp.SOFTENVALUE, mSoftenValue);
                 }
             }
             break;
         }
-        SharedPreferencesUtils.setParam(mContext, ConstantApp.PINKVALUE, mPinkValue);
-        SharedPreferencesUtils.setParam(mContext, ConstantApp.WHITENVALUE, mWhitenValue);
-        SharedPreferencesUtils.setParam(mContext, ConstantApp.REDDENVALUE, mReddenValue);
-        SharedPreferencesUtils.setParam(mContext, ConstantApp.SOFTENVALUE, mSoftenValue);
-        SharedPreferencesUtils.setParam(mContext, ConstantApp.FILTERVALUE, mFilterValue);
     }
 
     @Override
@@ -318,14 +273,13 @@ public class PreviewFragment extends BaseFragment implements SurfaceHolder.Callb
 
     @Override
     public void onItemClick(String filtertype) {
-        if (null==filtertype)
+        if (null == filtertype)
             return;
         if (filtertype.equals(mCurFilterStrength)) {
             return;
         }
         mCurFilterStrength = filtertype;
         mPreviewUtils.SetColorFilterByName(filtertype);
-        mPreviewUtils.SetColorFilterStrength(mFilterValue);
         mAdapter.notifyDataSetChanged();
         SharedPreferencesUtils.setParam(mContext, ConstantApp.CURFILTERSTRENGTH, filtertype);
     }

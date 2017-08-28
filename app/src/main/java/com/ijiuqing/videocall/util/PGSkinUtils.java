@@ -22,12 +22,12 @@ public class PGSkinUtils {
     private final String LOG_TAG = "PGSkinUtils";
 
     //default value
-    private float mPinkValue = 0.6f;
-    private float mWhitenValue = 0.5f;
-    private float mReddenValue = 0.6f;
-    private int mSoftenValue = 70;
+    private float mPinkValue = 0f;
+    private float mWhitenValue = 0f;
+    private float mReddenValue = 0f;
+    private int mSoftenValue = 0;
     private String mFilterName = "";
-    private int mFilterStrength = 100;
+    private int mFilterStrength = 0;
     private PGSkinPrettifyEngine.PG_SoftenAlgorithm mAlgorithm;
 
     private boolean mFilterChange;
@@ -44,12 +44,11 @@ public class PGSkinUtils {
     public PGSkinUtils(Context context) {
         mContext = context;
         mPGSkinUtils = new PGPrettifySDK(context, AppConfig.IS_USE_INDEPENDENT_THREAD);
-        mPinkValue = (float) SharedPreferencesUtils.getParam(mContext, ConstantApp.PINKVALUE, 0.4f);
-        mWhitenValue = (float) SharedPreferencesUtils.getParam(mContext, ConstantApp.WHITENVALUE, 0.4f);
-        mReddenValue = (float) SharedPreferencesUtils.getParam(mContext, ConstantApp.REDDENVALUE, 0.4f);
-        mSoftenValue = (int) SharedPreferencesUtils.getParam(mContext, ConstantApp.SOFTENVALUE, 70);
-        mFilterStrength = (int) SharedPreferencesUtils.getParam(mContext, ConstantApp.FILTERVALUE, 100);
-        mFilterName = (String) SharedPreferencesUtils.getParam(mContext, ConstantApp.CURFILTERSTRENGTH, "Deep");
+        mPinkValue = (float) SharedPreferencesUtils.getParam(mContext, ConstantApp.PINKVALUE, 0f);
+        mWhitenValue = (float) SharedPreferencesUtils.getParam(mContext, ConstantApp.WHITENVALUE, 0f);
+        mReddenValue = (float) SharedPreferencesUtils.getParam(mContext, ConstantApp.REDDENVALUE, 0f);
+        mSoftenValue = (int) SharedPreferencesUtils.getParam(mContext, ConstantApp.SOFTENVALUE, 0);
+        mFilterStrength = (int) SharedPreferencesUtils.getParam(mContext, ConstantApp.FILTERVALUE, 0);
     }
 
     public void setCameraInfo(CameraInfo cameraInfo) {
