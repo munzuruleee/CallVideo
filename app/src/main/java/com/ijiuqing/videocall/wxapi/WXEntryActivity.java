@@ -31,9 +31,9 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler,OnLo
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        userLoginModel = new UserLoginImpl();
         //如果没回调onResp，八成是这句没有写
         AGApplication.getApi().handleIntent(getIntent(), this);
-        userLoginModel = new UserLoginImpl();
     }
 
     // 微信发送请求到第三方应用时，会回调到该方法

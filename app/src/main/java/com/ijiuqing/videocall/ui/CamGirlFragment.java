@@ -13,6 +13,9 @@ import android.widget.Toast;
 import com.ijiuqing.videocall.R;
 import com.ijiuqing.videocall.base.BaseFragment;
 import com.ijiuqing.videocall.common.Constant;
+import com.ijiuqing.videocall.model.CamGirlListModel;
+import com.ijiuqing.videocall.model.OnGetCamGirListListener;
+import com.ijiuqing.videocall.model.imp.CamGirlListImpl;
 import com.ijiuqing.videocall.ui.view.CamGirlListAdapter;
 import com.ijiuqing.videocall.ui.view.ViewPrama;
 import com.ijiuqing.videocall.ui.view.ViewUtil;
@@ -37,7 +40,8 @@ import me.yuqirong.cardswipelayout.OnSwipeListener;
  * create an instance of this fragment.
  */
 public class CamGirlFragment extends BaseFragment implements
-        View.OnClickListener, OnSwipeListener<Integer> ,OnRefreshListener{
+        View.OnClickListener, OnSwipeListener<Integer> ,OnRefreshListener
+        ,OnGetCamGirListListener{
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private View mView;
@@ -46,6 +50,7 @@ public class CamGirlFragment extends BaseFragment implements
     private RecyclerView rcvCamGirlList;
     private SmartRefreshLayout refreshLayout;
     private List<Integer> mList = new ArrayList<>();
+    private CamGirlListModel camGirlListModel;
 
     public CamGirlFragment() {
         // Required empty public constructor
@@ -63,6 +68,7 @@ public class CamGirlFragment extends BaseFragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        camGirlListModel = new CamGirlListImpl();
     }
 
 
@@ -85,10 +91,7 @@ public class CamGirlFragment extends BaseFragment implements
     }
 
     private void initData() {
-        mList.add(1);
-        mList.add(1);
-        mList.add(1);
-        mList.add(1);
+        camGirlListModel.getCamGirList(getContext(),this);
     }
 
     @Override
@@ -132,5 +135,15 @@ public class CamGirlFragment extends BaseFragment implements
         initData();
         refreshlayout.finishRefresh();
         rcvCamGirlList.getAdapter().notifyDataSetChanged();
+    }
+
+    @Override
+    public void onSuccess() {
+
+    }
+
+    @Override
+    public void onFail() {
+
     }
 }

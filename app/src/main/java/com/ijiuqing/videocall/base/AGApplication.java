@@ -1,10 +1,17 @@
 package com.ijiuqing.videocall.base;
 
 import android.app.Application;
+import android.content.Context;
+import android.text.TextUtils;
+import android.util.Log;
 
+import com.alibaba.sdk.android.push.CloudPushService;
+import com.alibaba.sdk.android.push.CommonCallback;
+import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.ijiuqing.videocall.common.ConstantApp;
+import com.ijiuqing.videocall.util.SharedPreferencesUtils;
 import com.ijiuqing.videocall.work.WorkerThread;
 import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
@@ -19,12 +26,12 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 
 public class AGApplication extends Application {
-
+    private static final String TAG = "AGApplication";
     private WorkerThread mWorkerThread;
     private static IWXAPI api;
     private static AGApplication agApplication = null;
     public static RequestQueue mQueue;
-
+    public static CloudPushService pushService;
     public static AGApplication getApplication() {
         return agApplication;
     }
@@ -36,6 +43,7 @@ public class AGApplication extends Application {
         mQueue = Volley.newRequestQueue(getApplicationContext());
         registToWX();
         initImageLoader();
+        initCloudChannel(getApplicationContext());
     }
 
     private void initImageLoader() {
@@ -57,6 +65,51 @@ public class AGApplication extends Application {
         builder.writeDebugLogs();
         ImageLoaderConfiguration config = builder.build();
         ImageLoader.getInstance().init(config);
+    }
+
+    /**
+     * 初始化云推送通道
+     * @param applicationContext
+     */
+    private void initCloudChannel(Context applicationContext) {
+        PushServiceFactory.init(applicationContext);
+        pushService = PushServiceFactory.getCloudPushService();
+        pushService.register(applicationContext, new CommonCallback() {
+            @Override
+            public void onSuccess(String response) {
+                Log.d(TAG, "init cloudchannel success");
+            }
+            @Override
+            public void onFailed(String errorCode, String errorMessage) {
+                Log.d(TAG, "init cloudchannel failed -- errorcode:" + errorCode + " -- errorMessage:" + errorMessage);
+            }
+        });
+
+        Log.d(TAG, pushService.getDeviceId());
+        pushService.setLogLevel(CloudPushService.LOG_ERROR);
+        String account = (String) SharedPreferencesUtils.getParam(getApplicationContext(), ConstantApp.ULID, "");
+//        if (!TextUtils.isEmpty(account)){
+            bindAccount("internet");
+//        }
+    }
+
+    public void bindAccount(String account) {
+        pushService.bindAccount(account, new CommonCallback() {
+            @Override
+            public void onSuccess(String s) {
+                Log.d(TAG, " bindAccount success");
+            }
+
+            @Override
+            public void onFailed(String errorCode, String errorMessage) {
+                Log.d(TAG, " bindAccount failed -- errorcode:" + errorCode + " -- errorMessage:" + errorMessage);
+            }
+        });
+    }
+
+    public String getDeviceId() {
+        if (pushService!=null) return pushService.getDeviceId();
+        else return null;
     }
 
     private IWXAPI registToWX() {

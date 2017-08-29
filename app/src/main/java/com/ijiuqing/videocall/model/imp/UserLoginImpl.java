@@ -54,6 +54,7 @@ public class UserLoginImpl implements UserLoginModel {
                 SharedPreferencesUtils.setParam(context, ConstantApp.ULSTATE, userInfo.getUlState());
                 SharedPreferencesUtils.setParam(context, ConstantApp.UIHEADIMGURL, userInfo.getUiHeadimgurl());
                 SharedPreferencesUtils.setParam(context, ConstantApp.LOGINFLAG, true);
+                AGApplication.getApplication().bindAccount(userInfo.getUlId());
                 loginListener.loginSuccess();
             }
         }, new Response.ErrorListener() {
@@ -66,6 +67,44 @@ public class UserLoginImpl implements UserLoginModel {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> Params = new HashMap<String, String>();
                 Params.put("code", code);
+                Params.put("type", "1");
+                Params.put("deviceId", AGApplication.getApplication().getDeviceId());
+                return Params;
+            }
+        };
+        AGApplication.mQueue.add(stringRequest);
+    }
+
+    @Override
+    public void onInitLogin(final Context context, final String uid, final OnLoginListener loginListener) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                AppUrl.LOGIN, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (TextUtils.isEmpty(response)) {
+                    loginListener.loginFail();
+                    return;
+                }
+                Gson gson = new Gson();
+                StatusInfo statusInfo = gson.fromJson(response, StatusInfo.class);
+                if (!statusInfo.getState().equals("200")) {
+                    loginListener.loginFail();
+                    return;
+                }
+                loginListener.loginSuccess();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                loginListener.loginFail();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> Params = new HashMap<String, String>();
+                Params.put("uid", uid);
+                Params.put("type", "2");
+                Params.put("deviceId", AGApplication.getApplication().getDeviceId());
                 return Params;
             }
         };

@@ -8,4 +8,6 @@ import android.content.Context;
 
 public interface UserLoginModel {
     void onWXLogin(Context context, String code, OnLoginListener loginListener);
+
+    void onInitLogin(Context context,String uid,OnLoginListener loginListener);
 }

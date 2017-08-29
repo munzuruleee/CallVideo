@@ -7,26 +7,8 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="cc4200974d094386d1ee0021820d0673af1c78ed">
+        sha1="3be11b585a4c786bdbe18257bd99078840f5e963">
         <dex dex="/Users/apple/Documents/workspace/CallVideo/app/build/intermediates/transforms/dex/original/debug/folders/1000/10000/instant-run-bootstrap_e1b59ba093e6022d4c53aad83c8499d4056eb4a1/classes.dex" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/apple/.gradle/caches/modules-2/files-2.1/com.tencent.mm.opensdk/wechat-sdk-android-with-mta/1.0.2/d52a3b82b9efa2b247d9496c5b5bbc8ca1f93eab/wechat-sdk-android-with-mta-1.0.2.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d52a3b82b9efa2b247d9496c5b5bbc8ca1f93eab">
-        <dex dex="/Users/apple/Documents/workspace/CallVideo/app/build/intermediates/pre-dexed/original/debug/wechat-sdk-android-with-mta-1.0.2_6779cc48778aec4e0ff9ae04d652fb81cbb5585a.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/apple/.android/build-cache/9c8d0f731ebf325a57f2cdacb62ef205d9ea04eb/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="27127cc4423d6b93330b5d377346c32c83c49f31">
-        <dex dex="/Users/apple/Documents/workspace/CallVideo/app/build/intermediates/pre-dexed/original/debug/classes_4dc4516f6ac208b50ea75e3d90e8f8bdf9b5e39d.jar" />
     </item>
     <item
         is-multidex="true"
@@ -65,31 +47,13 @@
         <dex dex="/Users/apple/Documents/workspace/CallVideo/app/build/intermediates/pre-dexed/original/debug/gson-2.8.0_6e0f670ccbcec3f77b863d2d76b04ebba3c43044.jar" />
     </item>
     <item
-        is-multidex="false"
-        jar="/Users/apple/Library/Android/sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.2/constraint-layout-solver-1.0.2.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
-        <dex dex="/Users/apple/Documents/workspace/CallVideo/app/build/intermediates/pre-dexed/original/debug/constraint-layout-solver-1.0.2_e318c25c89e4efb38b25b20d7d71d43e5ba34206.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/apple/Documents/workspace/CallVideo/app/libs/agora-rtc-sdk.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="05e496bbb59c911ef6c3c0e04728201cfc22c55d">
-        <dex dex="/Users/apple/Documents/workspace/CallVideo/app/build/intermediates/pre-dexed/original/debug/agora-rtc-sdk_bbc6632a99541efb801fafb90ea53580a4793d37.jar" />
-    </item>
-    <item
         is-multidex="true"
-        jar="/Users/apple/Documents/workspace/CallVideo/app/libs/agora-rtc-sdk.jar"
+        jar="/Users/apple/Documents/workspace/CallVideo/app/libs/utdid4all-1.1.5.3_proguard.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="05e496bbb59c911ef6c3c0e04728201cfc22c55d">
-        <dex dex="/Users/apple/Documents/workspace/CallVideo/app/build/intermediates/transforms/dex/original/debug/folders/1000/2/agora-rtc-sdk_bbc6632a99541efb801fafb90ea53580a4793d37/classes.dex" />
+        sha1="989c3bb13060da1e3154bfe00236f76453a2725f">
+        <dex dex="/Users/apple/Documents/workspace/CallVideo/app/build/intermediates/transforms/dex/original/debug/folders/1000/2/utdid4all-1.1.5.3_proguard_02534f38bff9b5ac9748cdf7f075c0dbae8a8ab6/classes.dex" />
     </item>
     <item
         is-multidex="false"
@@ -129,6 +93,114 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/apple/.gradle/caches/modules-2/files-2.1/eu.the4thfloor.volley/com.android.volley/2015.05.28/b0b08cc0ac897e596abe6b263a9507cba875b705/com.android.volley-2015.05.28.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b0b08cc0ac897e596abe6b263a9507cba875b705">
+        <dex dex="/Users/apple/Documents/workspace/CallVideo/app/build/intermediates/pre-dexed/original/debug/com.android.volley-2015.05.28_679b8d9d1660378cb6b11d3a6fe425c98300294c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/apple/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.21/139535a69a4239db087de9bab0bee568bf8e0b70/slf4j-api-1.7.21.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="139535a69a4239db087de9bab0bee568bf8e0b70">
+        <dex dex="/Users/apple/Documents/workspace/CallVideo/app/build/intermediates/pre-dexed/original/debug/slf4j-api-1.7.21_dc5426b9bceda0089006de44e1088b7a29223f85.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/apple/.gradle/caches/modules-2/files-2.1/com.tencent.mm.opensdk/wechat-sdk-android-with-mta/1.0.2/d52a3b82b9efa2b247d9496c5b5bbc8ca1f93eab/wechat-sdk-android-with-mta-1.0.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d52a3b82b9efa2b247d9496c5b5bbc8ca1f93eab">
+        <dex dex="/Users/apple/Documents/workspace/CallVideo/app/build/intermediates/pre-dexed/original/debug/wechat-sdk-android-with-mta-1.0.2_6779cc48778aec4e0ff9ae04d652fb81cbb5585a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/apple/.android/build-cache/9c8d0f731ebf325a57f2cdacb62ef205d9ea04eb/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="27127cc4423d6b93330b5d377346c32c83c49f31">
+        <dex dex="/Users/apple/Documents/workspace/CallVideo/app/build/intermediates/pre-dexed/original/debug/classes_4dc4516f6ac208b50ea75e3d90e8f8bdf9b5e39d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/apple/Documents/workspace/CallVideo/app/libs/alicloud-android-push-sdk-3.0.11.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c3361ac17d1adab5f93b73978b61b32d9b88164b">
+        <dex dex="/Users/apple/Documents/workspace/CallVideo/app/build/intermediates/pre-dexed/original/release/alicloud-android-push-sdk-3.0.11_f9e5920e9af90416705d602c0781c89424cbae11.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/apple/Library/Android/sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.2/constraint-layout-solver-1.0.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="/Users/apple/Documents/workspace/CallVideo/app/build/intermediates/pre-dexed/original/debug/constraint-layout-solver-1.0.2_e318c25c89e4efb38b25b20d7d71d43e5ba34206.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/apple/Documents/workspace/CallVideo/app/libs/agora-rtc-sdk.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="05e496bbb59c911ef6c3c0e04728201cfc22c55d">
+        <dex dex="/Users/apple/Documents/workspace/CallVideo/app/build/intermediates/pre-dexed/original/debug/agora-rtc-sdk_bbc6632a99541efb801fafb90ea53580a4793d37.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/apple/Documents/workspace/CallVideo/app/libs/alicloud-android-push-sdk-3.0.11.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c3361ac17d1adab5f93b73978b61b32d9b88164b">
+        <dex dex="/Users/apple/Documents/workspace/CallVideo/app/build/intermediates/transforms/dex/original/debug/folders/1000/2/alicloud-android-push-sdk-3.0.11_f9e5920e9af90416705d602c0781c89424cbae11/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/apple/Documents/workspace/CallVideo/app/libs/agora-rtc-sdk.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="05e496bbb59c911ef6c3c0e04728201cfc22c55d">
+        <dex dex="/Users/apple/Documents/workspace/CallVideo/app/build/intermediates/transforms/dex/original/debug/folders/1000/2/agora-rtc-sdk_bbc6632a99541efb801fafb90ea53580a4793d37/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/apple/Documents/workspace/CallVideo/app/libs/alicloud-android-ut-5.1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="dc16d1c1cb1efd82424f8b80d624b43fac40cd04">
+        <dex dex="/Users/apple/Documents/workspace/CallVideo/app/build/intermediates/transforms/dex/original/debug/folders/1000/2/alicloud-android-ut-5.1.0_1e582fabb17e51e40cdcf524440d83eaa26451fa/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/apple/Documents/workspace/CallVideo/app/libs/utdid4all-1.1.5.3_proguard.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="989c3bb13060da1e3154bfe00236f76453a2725f">
+        <dex dex="/Users/apple/Documents/workspace/CallVideo/app/build/intermediates/pre-dexed/original/release/utdid4all-1.1.5.3_proguard_02534f38bff9b5ac9748cdf7f075c0dbae8a8ab6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/apple/Documents/workspace/CallVideo/app/libs/alicloud-android-ut-5.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="dc16d1c1cb1efd82424f8b80d624b43fac40cd04">
+        <dex dex="/Users/apple/Documents/workspace/CallVideo/app/build/intermediates/pre-dexed/original/release/alicloud-android-ut-5.1.0_1e582fabb17e51e40cdcf524440d83eaa26451fa.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/apple/.android/build-cache/9dc7479ff7d8e8a24942c8519998328dc30ab700/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
@@ -147,15 +219,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/apple/.gradle/caches/modules-2/files-2.1/eu.the4thfloor.volley/com.android.volley/2015.05.28/b0b08cc0ac897e596abe6b263a9507cba875b705/com.android.volley-2015.05.28.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="b0b08cc0ac897e596abe6b263a9507cba875b705">
-        <dex dex="/Users/apple/Documents/workspace/CallVideo/app/build/intermediates/pre-dexed/original/debug/com.android.volley-2015.05.28_679b8d9d1660378cb6b11d3a6fe425c98300294c.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/apple/Documents/workspace/CallVideo/app/libs/videoprp.jar"
         jumboMode="false"
         optimize="true"
@@ -171,15 +234,6 @@
         revision="25.0.2"
         sha1="a5d3431c37c127233fd585ca0681fb8a69b11f9d">
         <dex dex="/Users/apple/Documents/workspace/CallVideo/app/build/intermediates/transforms/dex/original/debug/folders/1000/2/videoprp_3c4d65959950e7a35e6dd93837babeea4ce1f00c/classes.dex" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/apple/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.21/139535a69a4239db087de9bab0bee568bf8e0b70/slf4j-api-1.7.21.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="139535a69a4239db087de9bab0bee568bf8e0b70">
-        <dex dex="/Users/apple/Documents/workspace/CallVideo/app/build/intermediates/pre-dexed/original/debug/slf4j-api-1.7.21_dc5426b9bceda0089006de44e1088b7a29223f85.jar" />
     </item>
     <item
         is-multidex="false"

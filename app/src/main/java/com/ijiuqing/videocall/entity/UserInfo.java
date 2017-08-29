@@ -7,52 +7,24 @@ package com.ijiuqing.videocall.entity;
 
 public class UserInfo {
 
-    /**
-     * ulId : ece7563d160
-     * ulPlatfromId : oIH9W1XeVZeLh9ALBYg9aDMHZmPE
-     * ulApplyId : ovU70wUx-nT59Iupc-Wk0sLLVlmI
-     * uiHeadimgurl : http://wx.qlogo.cn/mmopen/XMIv7Cc1M9VibHJClBO6eDyPD668g0n8JGxH0QceyAojO7wGvXY2Oq6HwaOibv2g1tFpKk3kcp2xpsia8YHWpjS5LwEpsN431Sp/0
-     * ulNickname : jiuqing
-     * ulSex : 1
-     * ulProvince :
-     * ulCity :
-     * ulCountry : AD
-     * ulState : 1
-     * createTime : 1503569727000
-     * modifyTime : 1503644078000
-     */
 
     private String ulId;
     private String ulPlatfromId;
     private String ulApplyId;
+    private Object uiUsername;
+    private Object uiPassword;
     private String uiHeadimgurl;
     private String ulNickname;
     private int ulSex;
     private String ulProvince;
     private String ulCity;
     private String ulCountry;
-    private int ulState;
-    private long createTime;
-    private long modifyTime;
-
-    @Override
-    public String toString() {
-        return "UserInfo{" +
-                "ulId='" + ulId + '\'' +
-                ", ulPlatfromId='" + ulPlatfromId + '\'' +
-                ", ulApplyId='" + ulApplyId + '\'' +
-                ", uiHeadimgurl='" + uiHeadimgurl + '\'' +
-                ", ulNickname='" + ulNickname + '\'' +
-                ", ulSex=" + ulSex +
-                ", ulProvince='" + ulProvince + '\'' +
-                ", ulCity='" + ulCity + '\'' +
-                ", ulCountry='" + ulCountry + '\'' +
-                ", ulState=" + ulState +
-                ", createTime=" + createTime +
-                ", modifyTime=" + modifyTime +
-                '}';
-    }
-
+    private String ulPushDevice;
+    private String ulPushAccount;
+    private String ulPushAlias;
+    private String ulPushTag;
+    private String createTime;
+    private String modifyTime;
 
     public String getUlId() {
         return ulId;
@@ -76,6 +48,22 @@ public class UserInfo {
 
     public void setUlApplyId(String ulApplyId) {
         this.ulApplyId = ulApplyId;
+    }
+
+    public Object getUiUsername() {
+        return uiUsername;
+    }
+
+    public void setUiUsername(Object uiUsername) {
+        this.uiUsername = uiUsername;
+    }
+
+    public Object getUiPassword() {
+        return uiPassword;
+    }
+
+    public void setUiPassword(Object uiPassword) {
+        this.uiPassword = uiPassword;
     }
 
     public String getUiHeadimgurl() {
@@ -126,28 +114,54 @@ public class UserInfo {
         this.ulCountry = ulCountry;
     }
 
-    public int getUlState() {
-        return ulState;
+    public String getUlPushDevice() {
+        return ulPushDevice;
     }
 
-    public void setUlState(int ulState) {
-        this.ulState = ulState;
+    public void setUlPushDevice(String ulPushDevice) {
+        this.ulPushDevice = ulPushDevice;
     }
 
-    public long getCreateTime() {
+    public String getUlPushAccount() {
+        return ulPushAccount;
+    }
+
+    public void setUlPushAccount(String ulPushAccount) {
+        this.ulPushAccount = ulPushAccount;
+    }
+
+    public String getUlPushAlias() {
+        return ulPushAlias;
+    }
+
+    public void setUlPushAlias(String ulPushAlias) {
+        this.ulPushAlias = ulPushAlias;
+    }
+
+    public String getUlPushTag() {
+        return ulPushTag;
+    }
+
+    public void setUlPushTag(String ulPushTag) {
+        this.ulPushTag = ulPushTag;
+    }
+
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(long createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
-    public long getModifyTime() {
+    public String getModifyTime() {
         return modifyTime;
     }
 
-    public void setModifyTime(long modifyTime) {
+    public void setModifyTime(String modifyTime) {
         this.modifyTime = modifyTime;
     }
+
+
 
 }

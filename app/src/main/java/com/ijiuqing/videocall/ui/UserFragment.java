@@ -81,10 +81,17 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         tvTNum = (TextView) mView.findViewById(R.id.t_num);
         ivSex = (ImageView) mView.findViewById(R.id.sex);
         TextView setting = (TextView) mView.findViewById(R.id.setting);
+        TextView tragt = (TextView) mView.findViewById(R.id.tragt);
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(),VideoChatViewActivity.class));
+            }
+        });
+        tragt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }
