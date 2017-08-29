@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.ijiuqing.videocall.R;
 import com.ijiuqing.videocall.base.BaseFragment;
 import com.ijiuqing.videocall.common.Constant;
+import com.ijiuqing.videocall.entity.StatusListInfo;
+import com.ijiuqing.videocall.entity.UserInfo;
 import com.ijiuqing.videocall.model.CamGirlListModel;
 import com.ijiuqing.videocall.model.OnGetCamGirListListener;
 import com.ijiuqing.videocall.model.imp.CamGirlListImpl;
@@ -40,8 +42,8 @@ import me.yuqirong.cardswipelayout.OnSwipeListener;
  * create an instance of this fragment.
  */
 public class CamGirlFragment extends BaseFragment implements
-        View.OnClickListener, OnSwipeListener<Integer> ,OnRefreshListener
-        ,OnGetCamGirListListener{
+        View.OnClickListener, OnSwipeListener<Integer>, OnRefreshListener
+        , OnGetCamGirListListener {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private View mView;
@@ -49,7 +51,7 @@ public class CamGirlFragment extends BaseFragment implements
     private String mParam2;
     private RecyclerView rcvCamGirlList;
     private SmartRefreshLayout refreshLayout;
-    private List<Integer> mList = new ArrayList<>();
+    private List<List<UserInfo>> mList = new ArrayList<>();
     private CamGirlListModel camGirlListModel;
 
     public CamGirlFragment() {
@@ -76,11 +78,11 @@ public class CamGirlFragment extends BaseFragment implements
     protected void initView(View view, Bundle savedInstanceState) {
         this.mView = view;
         refreshLayout = (SmartRefreshLayout) view.findViewById(R.id.refresh_layout);
-        ViewPrama.setMargins(refreshLayout,0,0,0, Constant.navigationHeight);
+        ViewPrama.setMargins(refreshLayout, 0, 0, 0, Constant.navigationHeight);
         refreshLayout.setOnRefreshListener(this);
         rcvCamGirlList = (RecyclerView) view.findViewById(R.id.cam_girl_list);
         rcvCamGirlList.setItemAnimator(new DefaultItemAnimator());
-        rcvCamGirlList.setAdapter(new CamGirlListAdapter(getContext(),mList));
+        rcvCamGirlList.setAdapter(new CamGirlListAdapter(getContext(), mList));
         CardItemTouchHelperCallback cardCallback =
                 new CardItemTouchHelperCallback(rcvCamGirlList.getAdapter(), mList);
         ItemTouchHelper touchHelper = new ItemTouchHelper(cardCallback);
@@ -91,7 +93,7 @@ public class CamGirlFragment extends BaseFragment implements
     }
 
     private void initData() {
-        camGirlListModel.getCamGirList(getContext(),this);
+        camGirlListModel.getCamGirList(getContext(), this);
     }
 
     @Override
@@ -127,7 +129,7 @@ public class CamGirlFragment extends BaseFragment implements
 
     @Override
     public void onSwipedClear() {
-        Toast.makeText(getContext(),"onSwipedClear",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "onSwipedClear", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -138,8 +140,16 @@ public class CamGirlFragment extends BaseFragment implements
     }
 
     @Override
-    public void onSuccess() {
-
+    public void onSuccess(StatusListInfo list) {
+        mList = new ArrayList<>();
+        for (UserInfo item : list.getData()) {
+            List<UserInfo> xlist = new ArrayList<>();
+            for (int i = 0; i < 4; i++) {
+                xlist.add(item);
+            }
+            mList.add(xlist);
+        }
+        rcvCamGirlList.getAdapter().notifyDataSetChanged();
     }
 
     @Override

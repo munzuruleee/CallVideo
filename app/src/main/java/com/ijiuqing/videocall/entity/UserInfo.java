@@ -15,6 +15,7 @@ public class UserInfo {
     private Object uiPassword;
     private String uiHeadimgurl;
     private String ulNickname;
+    private String ulMoney;
     private int ulSex;
     private String ulProvince;
     private String ulCity;
@@ -25,6 +26,14 @@ public class UserInfo {
     private String ulPushTag;
     private String createTime;
     private String modifyTime;
+
+    public String getUlMoney() {
+        return ulMoney;
+    }
+
+    public void setUlMoney(String ulMoney) {
+        this.ulMoney = ulMoney;
+    }
 
     public String getUlId() {
         return ulId;
@@ -163,5 +172,27 @@ public class UserInfo {
     }
 
 
-
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "ulId='" + ulId + '\'' +
+                ", ulPlatfromId='" + ulPlatfromId + '\'' +
+                ", ulApplyId='" + ulApplyId + '\'' +
+                ", uiUsername=" + uiUsername +
+                ", uiPassword=" + uiPassword +
+                ", uiHeadimgurl='" + uiHeadimgurl + '\'' +
+                ", ulNickname='" + ulNickname + '\'' +
+                ", ulMoney='" + ulMoney + '\'' +
+                ", ulSex=" + ulSex +
+                ", ulProvince='" + ulProvince + '\'' +
+                ", ulCity='" + ulCity + '\'' +
+                ", ulCountry='" + ulCountry + '\'' +
+                ", ulPushDevice='" + ulPushDevice + '\'' +
+                ", ulPushAccount='" + ulPushAccount + '\'' +
+                ", ulPushAlias='" + ulPushAlias + '\'' +
+                ", ulPushTag='" + ulPushTag + '\'' +
+                ", createTime='" + createTime + '\'' +
+                ", modifyTime='" + modifyTime + '\'' +
+                '}';
+    }
 }

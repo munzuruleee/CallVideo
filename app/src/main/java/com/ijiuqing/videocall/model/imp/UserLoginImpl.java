@@ -51,7 +51,6 @@ public class UserLoginImpl implements UserLoginModel {
                 SharedPreferencesUtils.setParam(context, ConstantApp.ULNICKNAME, userInfo.getUlNickname());
                 SharedPreferencesUtils.setParam(context, ConstantApp.ULCOUNTRY, userInfo.getUlCountry());
                 SharedPreferencesUtils.setParam(context, ConstantApp.ULSEX, userInfo.getUlSex());
-                SharedPreferencesUtils.setParam(context, ConstantApp.ULSTATE, userInfo.getUlState());
                 SharedPreferencesUtils.setParam(context, ConstantApp.UIHEADIMGURL, userInfo.getUiHeadimgurl());
                 SharedPreferencesUtils.setParam(context, ConstantApp.LOGINFLAG, true);
                 AGApplication.getApplication().bindAccount(userInfo.getUlId());
