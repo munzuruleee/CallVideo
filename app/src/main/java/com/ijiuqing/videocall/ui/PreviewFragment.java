@@ -15,9 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ijiuqing.videocall.R;
 import com.ijiuqing.videocall.base.BaseFragment;
@@ -52,7 +54,7 @@ import io.agora.videoprp.AgoraYuvEnhancer;
  * create an instance of this fragment.
  */
 public class PreviewFragment extends BaseFragment implements
-        SeekBar.OnSeekBarChangeListener, MyItemClickListener {
+        SeekBar.OnSeekBarChangeListener, MyItemClickListener,View.OnClickListener {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private float mWhitenValue = 0f;
@@ -76,6 +78,8 @@ public class PreviewFragment extends BaseFragment implements
     private RtcEngine mRtcEngine;// Tutorial Step 1
     private AgoraYuvEnhancer yuvEnhancer = null;
     private SurfaceView mSurfaceView = null;
+    private ImageView btnWhiten, btnDermabrasion;
+    private LinearLayout linWhiten, linDermabrasion;
     private final IRtcEngineEventHandler mRtcEventHandler = new IRtcEngineEventHandler() {
     };
 
@@ -118,33 +122,27 @@ public class PreviewFragment extends BaseFragment implements
     protected void initView(View view, Bundle savedInstanceState) {
         this.mView = view;
         mFrameLayout = (FrameLayout) mView.findViewById(R.id.Preview);
-        getPretty = (Button) mView.findViewById(R.id.get_pretty);
         prettyMenu = (LinearLayout) mView.findViewById(R.id.pretty_menu);
         ViewPrama.setMargins(prettyMenu, 0, 0, 0, Constant.navigationHeight);
-        getPretty.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (prettyMenu.getVisibility() == View.VISIBLE) {
-                    prettyMenu.setVisibility(View.GONE);
-                } else {
-                    prettyMenu.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
         SeekBar m_Seekwhiten = (SeekBar) mView.findViewById(R.id.seek_whiten);
         m_Seekwhiten.setOnSeekBarChangeListener(this);
         m_Seekwhiten.setProgress((int) (mWhitenValue * 100));
         TextView tv_whiten = (TextView) mView.findViewById(R.id.whiten_value);
         tv_whiten.setText(String.valueOf(mWhitenValue));
-
         SeekBar m_Seeksoften = (SeekBar) mView.findViewById(R.id.seek_soften);
         m_Seeksoften.setOnSeekBarChangeListener(this);
         m_Seeksoften.setProgress((int) mSoftenValue * 100);
         TextView tv_soften = (TextView) mView.findViewById(R.id.soften_value);
         tv_soften.setText(String.valueOf(mSoftenValue));
-
+        btnWhiten = (ImageView) mView.findViewById(R.id.btn_whiten);
+        btnDermabrasion = (ImageView) mView.findViewById(R.id.btn_dermabrasion);
+        btnWhiten.setOnClickListener(this);
+        btnDermabrasion.setOnClickListener(this);
+        linDermabrasion = (LinearLayout) mView.findViewById(R.id.lin_dermabrasion);
+        linWhiten = (LinearLayout) mView.findViewById(R.id.lin_whiten);
         mListView = (RecyclerView) mView.findViewById(R.id.listview);
+        ImageView btnRandom = (ImageView) mView.findViewById(R.id.btn_random);
+        btnRandom.setOnClickListener(this);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(mListView.getContext(), LinearLayoutManager.HORIZONTAL, false);
         mListView.setLayoutManager(mLayoutManager);
         ConstructList();
@@ -167,7 +165,7 @@ public class PreviewFragment extends BaseFragment implements
     // Tutorial Step 2
     private void setupVideoProfile() {
         mRtcEngine.enableVideo();
-        mRtcEngine.setVideoProfile(Constants.VIDEO_PROFILE_480P_8, false);
+        mRtcEngine.setVideoProfile(Constants.VIDEO_PROFILE_720P_3, false);
         mRtcEngine.isTextureEncodeSupported();
     }
 
@@ -177,7 +175,7 @@ public class PreviewFragment extends BaseFragment implements
         mSurfaceView = RtcEngine.CreateRendererView(getContext());
         mSurfaceView.setZOrderMediaOverlay(true);
         mFrameLayout.addView(mSurfaceView);
-        mRtcEngine.setupLocalVideo(new VideoCanvas(mSurfaceView, VideoCanvas.RENDER_MODE_ADAPTIVE, 0));
+        mRtcEngine.setupLocalVideo(new VideoCanvas(mSurfaceView, VideoCanvas.RENDER_MODE_HIDDEN, 0));
         yuvEnhancer.StartPreProcess();
     }
 
@@ -287,5 +285,34 @@ public class PreviewFragment extends BaseFragment implements
     @Override
     public String getCurFilterType() {
         return mCurFilterStrength;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_whiten:
+                if (linWhiten.getVisibility()== View.GONE){
+                    linWhiten.setVisibility(View.VISIBLE);
+                }else {
+                    linWhiten.setVisibility(View.GONE);
+                }
+                if (linDermabrasion.getVisibility() == View.VISIBLE){
+                    linDermabrasion.setVisibility(View.GONE);
+                }
+                break;
+            case R.id.btn_dermabrasion:
+                if (linDermabrasion.getVisibility() == View.GONE){
+                    linDermabrasion.setVisibility(View.VISIBLE);
+                }else {
+                    linDermabrasion.setVisibility(View.GONE);
+                }
+                if (linWhiten.getVisibility()== View.VISIBLE){
+                    linWhiten.setVisibility(View.GONE);
+                }
+                break;
+            case R.id.btn_random:
+                Toast.makeText(getContext(),"随机匹配功能正在开发中暂未开放",Toast.LENGTH_LONG).show();
+                break;
+        }
     }
 }

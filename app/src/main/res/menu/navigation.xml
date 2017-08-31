@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/module1"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+        android:icon="@drawable/model_preview_icon_press"
+        android:title="杨过" />
 
     <item
         android:id="@+id/module2"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+        android:icon="@drawable/model_camgirl_icon_press"
+        android:title="小龙女" />
 
     <item
         android:id="@+id/module3"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+        android:icon="@drawable/model_user_icon_press"
+        android:title="神龙" />
 
 </menu>

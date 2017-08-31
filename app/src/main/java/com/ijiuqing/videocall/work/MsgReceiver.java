@@ -8,6 +8,9 @@ import com.alibaba.sdk.android.push.CloudPushService;
 import com.alibaba.sdk.android.push.MessageReceiver;
 import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
 import com.alibaba.sdk.android.push.notification.CPushMessage;
+import com.google.gson.Gson;
+import com.ijiuqing.videocall.common.ConstantApp;
+import com.ijiuqing.videocall.entity.PushMsg;
 import com.ijiuqing.videocall.ui.NoticeActivity;
 import com.ijiuqing.videocall.ui.SplashActivity;
 
@@ -53,10 +56,17 @@ public class MsgReceiver extends MessageReceiver {
      */
     @Override
     public void onMessage(Context context, CPushMessage cPushMessage) {
+        if (!cPushMessage.getTitle().equals("LinkMai")){
+            return;
+        }
         try {
             Log.i(REC_TAG,"收到一条推送消息 ： " + cPushMessage.getTitle());
+            Gson gson = new Gson();
+            PushMsg pm = gson.fromJson(cPushMessage.getContent(), PushMsg.class);
             Intent intent = new Intent(context, NoticeActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra(ConstantApp.ROOMNUM, pm.getRoomId());
+            intent.putExtra(ConstantApp.LINKNAME, pm.getUserName());
             context.startActivity(intent);
         } catch (Exception e) {
             Log.i(REC_TAG, e.toString());

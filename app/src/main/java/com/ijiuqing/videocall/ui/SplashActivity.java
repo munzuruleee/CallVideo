@@ -3,6 +3,7 @@ package com.ijiuqing.videocall.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Window;
 
 import com.ijiuqing.videocall.R;
 import com.ijiuqing.videocall.base.BaseActivity;
@@ -49,9 +50,10 @@ public class SplashActivity extends BaseActivity implements OnLoginListener{
                     intent = new Intent(SplashActivity.this, LoginActivity.class);
                 }
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
             }
-        }, 1000 * 5);
+        }, 1000 * 2);
     }
 
     @Override
@@ -68,8 +70,9 @@ public class SplashActivity extends BaseActivity implements OnLoginListener{
                     intent = new Intent(SplashActivity.this, LoginActivity.class);
                 }
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
             }
-        }, 1000 * 5);
+        }, 1000 * 2);
     }
 }

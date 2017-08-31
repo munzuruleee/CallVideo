@@ -9,4 +9,10 @@
         <item name="android:selectableItemBackground">@null</item>
         <item name="android:selectableItemBackgroundBorderless">@null</item>
     </style>
+
+    <style name="AppTheme.Splash" parent="AppTheme">
+        <item name="android:windowExitTransition">@transition/fade</item>
+        <item name="android:windowEnterAnimation">@transition/fade</item>
+        <item name="android:windowReenterTransition">@transition/fade</item>
+    </style>
 </resources>

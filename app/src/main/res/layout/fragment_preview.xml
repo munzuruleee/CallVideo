@@ -9,32 +9,30 @@
         android:id="@+id/Preview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="美颜"
-        android:id="@+id/get_pretty"
-        android:background="#00000000"/>
+
     <LinearLayout
+        android:id="@+id/pretty_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:id="@+id/pretty_menu"
         android:layout_gravity="center_horizontal"
         android:orientation="vertical">
         <!--android:visibility="gone"-->
 
-        <LinearLayout android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:visibility="gone"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="粉嫩程度"
-                android:textColor="#000000"/>
+                android:textColor="#000000" />
+
             <SeekBar
                 android:id="@+id/seek_pink"
                 android:layout_width="200dp"
@@ -45,28 +43,32 @@
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:progressDrawable="@drawable/seekbar_bg"
-                android:thumb="@drawable/seekbar_thumb_selector"
-                />
+                android:thumb="@drawable/seekbar_thumb_selector" />
+
             <TextView
                 android:id="@+id/pink_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="0.30"
-                android:textColor="#000000"/>
+                android:textColor="#000000" />
         </LinearLayout>
 
-        <LinearLayout android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/lin_whiten"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            >
+            android:visibility="gone">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="白皙程度"
-                android:textColor="#000000"/>
+                android:textColor="#000000" />
+
             <SeekBar
                 android:id="@+id/seek_whiten"
                 android:layout_width="200dp"
@@ -77,29 +79,31 @@
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:progressDrawable="@drawable/seekbar_bg"
-                android:thumb="@drawable/seekbar_thumb_selector"
-                />
+                android:thumb="@drawable/seekbar_thumb_selector" />
+
             <TextView
                 android:id="@+id/whiten_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="0.30"
-                android:textColor="#000000"/>
+                android:textColor="#000000" />
         </LinearLayout>
 
-        <LinearLayout android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:visibility="gone"
             android:orientation="horizontal"
-            >
+            android:visibility="gone">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="红润程度"
-                android:textColor="#000000"/>
+                android:textColor="#000000" />
+
             <SeekBar
                 android:id="@+id/seek_redden"
                 android:layout_width="200dp"
@@ -110,29 +114,33 @@
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:progressDrawable="@drawable/seekbar_bg"
-                android:thumb="@drawable/seekbar_thumb_selector"
-                />
+                android:thumb="@drawable/seekbar_thumb_selector" />
+
             <TextView
                 android:id="@+id/redden_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="0.30"
-                android:textColor="#000000"/>
+                android:textColor="#000000" />
         </LinearLayout>
 
 
-        <LinearLayout android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/lin_dermabrasion"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            >
+            android:visibility="gone">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="美肤强度"
-                android:textColor="#000000"/>
+                android:textColor="#000000" />
+
             <SeekBar
                 android:id="@+id/seek_soften"
                 android:layout_width="200dp"
@@ -143,28 +151,78 @@
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:progressDrawable="@drawable/seekbar_bg"
-                android:thumb="@drawable/seekbar_thumb_selector"
-                />
+                android:thumb="@drawable/seekbar_thumb_selector" />
+
             <TextView
                 android:id="@+id/soften_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="0.30"
-                android:textColor="#000000"/>
+                android:textColor="#000000" />
         </LinearLayout>
-        <LinearLayout android:layout_width="match_parent"
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/btn_whiten"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/whiten_btn_icon" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:id="@+id/btn_random"
+                    android:background="@drawable/icon_random_match" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/btn_dermabrasion"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/dermabrasion_btn_icon" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:visibility="gone"
                 android:text="滤镜强度"
-                android:textColor="#000000"/>
+                android:textColor="#000000"
+                android:visibility="gone" />
+
             <SeekBar
                 android:id="@+id/filter_redden"
                 android:layout_width="200dp"
@@ -173,31 +231,32 @@
                 android:maxHeight="3.0dip"
                 android:minHeight="3.0dip"
                 android:paddingLeft="8dp"
-                android:visibility="gone"
                 android:paddingRight="8dp"
                 android:progressDrawable="@drawable/seekbar_bg"
                 android:thumb="@drawable/seekbar_thumb_selector"
-                />
+                android:visibility="gone" />
+
             <TextView
                 android:id="@+id/filter_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:visibility="gone"
                 android:text="0.30"
-                android:textColor="#000000"/>
+                android:textColor="#000000"
+                android:visibility="gone" />
         </LinearLayout>
-        <LinearLayout android:layout_width="match_parent"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="65dp"
             android:gravity="center_vertical"
-            android:visibility="gone"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/listview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </android.support.v7.widget.RecyclerView>
-
+                android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

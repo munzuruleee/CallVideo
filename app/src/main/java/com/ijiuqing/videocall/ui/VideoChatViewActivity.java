@@ -1,15 +1,20 @@
 package com.ijiuqing.videocall.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -37,12 +42,14 @@ public class VideoChatViewActivity extends BaseActivity implements CountDownCall
     SurfaceView suvRemote;
     SurfaceView suvLocal;
     TextView txv;
-    LinearLayout wait;
+    RelativeLayout wait;
     private float mWhitenValue = 0f;
     private float mSoftenValue = 0f;
     boolean isSwitchFlag = false;
     private RtcEngine mRtcEngine;// Tutorial Step 1
     private AgoraYuvEnhancer yuvEnhancer = null;
+    private String channel;
+    private LinearLayout linWhiten, linDermabrasion;
     private final IRtcEngineEventHandler mRtcEventHandler = new IRtcEngineEventHandler() { // Tutorial Step 1
         @Override
         public void onFirstRemoteVideoDecoded(final int uid, int width, int height, int elapsed) { // Tutorial Step 5
@@ -84,8 +91,13 @@ public class VideoChatViewActivity extends BaseActivity implements CountDownCall
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_video_chat_view);
         yuvEnhancer = new AgoraYuvEnhancer(VideoChatViewActivity.this);
+        Intent intent = getIntent();
+        if (intent!=null){
+            channel = intent.getStringExtra(ConstantApp.CHANNEL);
+        }
     }
 
     @Override
@@ -98,7 +110,9 @@ public class VideoChatViewActivity extends BaseActivity implements CountDownCall
             }
         });
         txv = (TextView) findViewById(R.id.timer);
-        wait = (LinearLayout) findViewById(R.id.wait);
+        wait = (RelativeLayout) findViewById(R.id.wait);
+        linDermabrasion = (LinearLayout) findViewById(R.id.lin_dermabrasion);
+        linWhiten = (LinearLayout) findViewById(R.id.lin_whiten);
         SeekBar m_Seekwhiten = (SeekBar) findViewById(R.id.seek_whiten);
         m_Seekwhiten.setOnSeekBarChangeListener(this);
         m_Seekwhiten.setProgress((int) (mWhitenValue * 100));
@@ -137,8 +151,26 @@ public class VideoChatViewActivity extends BaseActivity implements CountDownCall
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (mRtcEngine!=null) {
+            mRtcEngine.muteLocalVideoStream(false);
+            mRtcEngine.muteLocalAudioStream(false);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
+        if (mRtcEngine!=null) {
+            mRtcEngine.muteLocalVideoStream(true);
+            mRtcEngine.muteLocalAudioStream(true);
+        }
     }
 
     @Override
@@ -197,6 +229,28 @@ public class VideoChatViewActivity extends BaseActivity implements CountDownCall
         finish();
     }
 
+    public void onWhitenClick(View view) {
+        if (linWhiten.getVisibility()== View.GONE){
+            linWhiten.setVisibility(View.VISIBLE);
+        }else {
+            linWhiten.setVisibility(View.GONE);
+        }
+        if (linDermabrasion.getVisibility() == View.VISIBLE){
+            linDermabrasion.setVisibility(View.GONE);
+        }
+    }
+
+    public void onDermabrasionClick(View view) {
+        if (linDermabrasion.getVisibility() == View.GONE){
+            linDermabrasion.setVisibility(View.VISIBLE);
+        }else {
+            linDermabrasion.setVisibility(View.GONE);
+        }
+        if (linWhiten.getVisibility()== View.VISIBLE){
+            linWhiten.setVisibility(View.GONE);
+        }
+    }
+
     // Tutorial Step 1
     private void initializeAgoraEngine() {
         try {
@@ -210,7 +264,7 @@ public class VideoChatViewActivity extends BaseActivity implements CountDownCall
     // Tutorial Step 2
     private void setupVideoProfile() {
         mRtcEngine.enableVideo();
-        mRtcEngine.setVideoProfile(Constants.VIDEO_PROFILE_360P, false);
+        mRtcEngine.setVideoProfile(Constants.VIDEO_PROFILE_720P, false);
         mRtcEngine.isTextureEncodeSupported();
     }
 
@@ -225,7 +279,7 @@ public class VideoChatViewActivity extends BaseActivity implements CountDownCall
 
     // Tutorial Step 4
     private void joinChannel() {
-        mRtcEngine.joinChannel(null, "demoChannel1", "Extra Optional Data", 0); // if you do not specify the uid, we will generate the uid for you
+        mRtcEngine.joinChannel(null, channel, "Extra Optional Data", 0); // if you do not specify the uid, we will generate the uid for you
     }
 
     // Tutorial Step 5
@@ -250,6 +304,7 @@ public class VideoChatViewActivity extends BaseActivity implements CountDownCall
     private void onRemoteUserLeft() {
         FrameLayout container = (FrameLayout) findViewById(R.id.remote_video_view_container);
         container.removeAllViews();
+        finish();
     }
 
     // Tutorial Step 10

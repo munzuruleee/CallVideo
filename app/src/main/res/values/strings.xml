@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">VideoCall</string>
+    <string name="app_name">Gugu</string>
     <string name="action_settings">Settings</string>
     <string name="msg_choose_role">Would you like to be the broadcaster or an audience?</string>
     <string name="label_audience">Audience</string>

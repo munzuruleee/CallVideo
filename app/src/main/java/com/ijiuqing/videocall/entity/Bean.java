@@ -22,7 +22,7 @@ public class Bean {
             "\"ulApplyId\":\"ovU70wUDyfFGrjDpueIkpg0Q5nPI\"," +
             "\"uiHeadimgurl\":\"http://wx.qlogo.cn/mmopen/XMIv7Cc1M9VibHJClBO6eD6dmv67oDZtnFDpicXmfHgflM9sfmCED12z8HsQ36lL7eSx4tbrg98UTXZ92g7W0I6zd8QO0CCjhb/0\"," +
             "\"ulNickname\":\"笑对生活\"," +
-            "\"ulSex\":0," +
+            "\"ulSex\":2," +
             "\"ulMoney\":100," +
             "\"ulPushDevice\":\"35955b5dbc1a4085b9448135be2036bb\"" +
             "}," +
@@ -37,14 +37,14 @@ public class Bean {
             "\"ulPushDevice\":\"810d4e076b5a403fa33aa7885056ec10\"" +
             "}," +
             "{" +
-            "\"ulId\":\"d46dd33eea7\"," +
-            "\"ulPlatfromId\":\"oIH9W1QcBMwPN5RE2lrJlouez3tw\"," +
-            "\"ulApplyId\":\"ovU70wdVHtMILBC6oCIt9DObUEi8\"," +
-            "\"uiHeadimgurl\":\"http://wx.qlogo.cn/mmopen/Ph4iaNqNeJDuQ7H04NxhzWbLbNhqQpOnqKVChCPP3icezJnlRPqUDJJpUCUUibln2ic1pXSw3GibTrbCyibHGmdhcW7jbgo0IGD54e/0\"," +
-            "\"ulNickname\":\"1231231123\"," +
-            "\"ulSex\":1," +
-            "\"ulMoney\":100," +
-            "\"ulPushDevice\":\"810d4e076b5a403fa33aa7885056ec10\"" +
+            "\"ulId\":\"fe66833f1bd\"," +
+            "\"ulPlatfromId\":\"oIH9W1bsdopyRN_V0DjuEP1kAuQE\"," +
+            "\"ulApplyId\":\"ovU70wWfxmQwjPk-F0uVQ4DQYXbA\"," +
+            "\"uiHeadimgurl\":\"http://wx.qlogo.cn/mmopen/vi_32/E49VHeweE17VVlYQZl2hkPSkK2dKibtdJjeyme9XAhdQMfNIEomlaj3p87gPdFHicn94F4Adribxt4TF3zfGayKcQ/0\"," +
+            "\"ulNickname\":\"妍笑晏\"," +
+            "\"ulSex\":2," +
+            "\"ulMoney\":300," +
+            "\"ulPushDevice\":\"1fff863363f440a292a0628e6fd3432d\"" +
             "}" +
             "]," +
             "\"state\":\"200\"" +

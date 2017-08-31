@@ -1,9 +1,11 @@
 package com.ijiuqing.videocall.ui.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +17,31 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
 import com.ijiuqing.videocall.R;
+import com.ijiuqing.videocall.base.AGApplication;
+import com.ijiuqing.videocall.common.AppUrl;
+import com.ijiuqing.videocall.common.ConstantApp;
+import com.ijiuqing.videocall.entity.StatusInfo;
 import com.ijiuqing.videocall.entity.UserInfo;
+import com.ijiuqing.videocall.model.OnLoginListener;
+import com.ijiuqing.videocall.ui.NoticeActivity;
+import com.ijiuqing.videocall.ui.VideoChatViewActivity;
+import com.ijiuqing.videocall.util.SharedPreferencesUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * Created by songjiyuan on 17/8/27.
@@ -29,8 +50,9 @@ import java.util.List;
 public class CamGirlListAdapter extends RecyclerView.Adapter {
     private List<List<UserInfo>> list;
     private Context mContext;
+    private String roomId;
 
-    public CamGirlListAdapter(Context context,List<List<UserInfo>> list) {
+    public CamGirlListAdapter(Context context, List<List<UserInfo>> list) {
         this.list = list;
         this.mContext = context;
     }
@@ -45,86 +67,93 @@ public class CamGirlListAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myHolder = (MyViewHolder) holder;
         final List<UserInfo> mList = list.get(position);
-        if (mList.get(0)!=null){
+        int sizeList = mList.size();
+        if (sizeList == 0) {
+            return;
+        }
+        if (sizeList > 0) {
             myHolder.linPosition1.setVisibility(View.VISIBLE);
-            ImageLoader.getInstance().displayImage(mList.get(0).getUiHeadimgurl(),myHolder.ivImg1);
+            ImageLoader.getInstance().displayImage(mList.get(0).getUiHeadimgurl(), myHolder.ivImg1);
             myHolder.tvNickName1.setText(mList.get(0).getUlNickname());
-            switch (mList.get(0).getUlSex()){
-                case 1:
-                    myHolder.ivSex1.setImageResource(R.drawable.sex_male);
-                    break;
-                case 2:
-                    myHolder.ivSex1.setImageResource(R.drawable.sex_female);
-                    break;
-            }
             myHolder.tvMoney1.setText(mList.get(0).getUlMoney());
-            myHolder.ibtn_join1.setOnClickListener(new View.OnClickListener() {
+            myHolder.ivImg1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(mContext,mList.get(0).getUlId(),Toast.LENGTH_SHORT).show();
+                    pushUid(mList.get(0).getUlId());
                 }
             });
+        }else {
+            myHolder.linPosition1.setVisibility(View.GONE);
         }
-        if (mList.get(1)!=null){
+        if (sizeList > 1) {
             myHolder.linPosition2.setVisibility(View.VISIBLE);
-            ImageLoader.getInstance().displayImage(mList.get(1).getUiHeadimgurl(),myHolder.ivImg2);
+            ImageLoader.getInstance().displayImage(mList.get(1).getUiHeadimgurl(), myHolder.ivImg2);
             myHolder.tvNickName2.setText(mList.get(1).getUlNickname());
-            switch (mList.get(1).getUlSex()){
-                case 1:
-                    myHolder.ivSex2.setImageResource(R.drawable.sex_male);
-                    break;
-                case 2:
-                    myHolder.ivSex2.setImageResource(R.drawable.sex_female);
-                    break;
-            }
             myHolder.tvMoney2.setText(mList.get(1).getUlMoney());
-            myHolder.ibtn_join2.setOnClickListener(new View.OnClickListener() {
+            myHolder.ivImg2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(mContext,mList.get(1).getUlId(),Toast.LENGTH_SHORT).show();
+                    pushUid(mList.get(1).getUlId());
                 }
             });
+        }else {
+            myHolder.linPosition2.setVisibility(View.GONE);
         }
-        if (mList.get(2)!=null){
+        if (sizeList > 2) {
             myHolder.linPosition3.setVisibility(View.VISIBLE);
-            ImageLoader.getInstance().displayImage(mList.get(2).getUiHeadimgurl(),myHolder.ivImg3);
+            ImageLoader.getInstance().displayImage(mList.get(2).getUiHeadimgurl(), myHolder.ivImg3);
             myHolder.tvNickName3.setText(mList.get(2).getUlNickname());
-            switch (mList.get(2).getUlSex()){
-                case 1:
-                    myHolder.ivSex3.setImageResource(R.drawable.sex_male);
-                    break;
-                case 2:
-                    myHolder.ivSex3.setImageResource(R.drawable.sex_female);
-                    break;
-            }
             myHolder.tvMoney3.setText(mList.get(2).getUlMoney());
-            myHolder.ibtn_join3.setOnClickListener(new View.OnClickListener() {
+            myHolder.ivImg3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(mContext,mList.get(2).getUlId(),Toast.LENGTH_SHORT).show();
+                    pushUid(mList.get(2).getUlId());
                 }
             });
+        }else {
+            myHolder.linPosition3.setVisibility(View.GONE);
         }
-        if (mList.get(3)!=null){
+        if (sizeList > 3) {
             myHolder.linPosition4.setVisibility(View.VISIBLE);
-            ImageLoader.getInstance().displayImage(mList.get(3).getUiHeadimgurl(),myHolder.ivImg4);
+            ImageLoader.getInstance().displayImage(mList.get(3).getUiHeadimgurl(), myHolder.ivImg4);
             myHolder.tvNickName4.setText(mList.get(3).getUlNickname());
-            switch (mList.get(3).getUlSex()){
-                case 1:
-                    myHolder.ivSex4.setImageResource(R.drawable.sex_male);
-                    break;
-                case 2:
-                    myHolder.ivSex4.setImageResource(R.drawable.sex_female);
-                    break;
-            }
             myHolder.tvMoney4.setText(mList.get(3).getUlMoney());
-            myHolder.ibtn_join4.setOnClickListener(new View.OnClickListener() {
+            myHolder.ivImg4.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(mContext,mList.get(3).getUlId(),Toast.LENGTH_SHORT).show();
+                    pushUid(mList.get(3).getUlId());
                 }
             });
+        }else {
+            myHolder.linPosition4.setVisibility(View.GONE);
         }
+    }
+
+    public void pushUid(final String uid) {
+        roomId = uid + SharedPreferencesUtils.getParam(mContext, ConstantApp.ULID, "");
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                AppUrl.link, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Intent intent = new Intent(mContext, VideoChatViewActivity.class);
+                intent.putExtra(ConstantApp.CHANNEL, roomId);
+                mContext.startActivity(intent);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> Params = new HashMap<String, String>();
+                Params.put("uid", uid);
+                Params.put("roomId", roomId);
+                return Params;
+            }
+        };
+        AGApplication.mQueue.add(stringRequest);
     }
 
     @Override
@@ -141,10 +170,6 @@ public class CamGirlListAdapter extends RecyclerView.Adapter {
         ImageView ivImg2;
         ImageView ivImg3;
         ImageView ivImg4;
-        ImageView ivSex1;
-        ImageView ivSex2;
-        ImageView ivSex3;
-        ImageView ivSex4;
         TextView tvNickName1;
         TextView tvNickName2;
         TextView tvNickName3;
@@ -153,10 +178,7 @@ public class CamGirlListAdapter extends RecyclerView.Adapter {
         TextView tvMoney2;
         TextView tvMoney3;
         TextView tvMoney4;
-        ImageButton ibtn_join1;
-        ImageButton ibtn_join2;
-        ImageButton ibtn_join3;
-        ImageButton ibtn_join4;
+
         MyViewHolder(View itemView) {
             super(itemView);
             linPosition1 = (LinearLayout) itemView.findViewById(R.id.lin_position1);
@@ -167,10 +189,6 @@ public class CamGirlListAdapter extends RecyclerView.Adapter {
             ivImg2 = (ImageView) itemView.findViewById(R.id.iv_img2);
             ivImg3 = (ImageView) itemView.findViewById(R.id.iv_img3);
             ivImg4 = (ImageView) itemView.findViewById(R.id.iv_img4);
-            ivSex1 = (ImageView) itemView.findViewById(R.id.iv_sex1);
-            ivSex2 = (ImageView) itemView.findViewById(R.id.iv_sex2);
-            ivSex3 = (ImageView) itemView.findViewById(R.id.iv_sex3);
-            ivSex4 = (ImageView) itemView.findViewById(R.id.iv_sex4);
             tvNickName1 = (TextView) itemView.findViewById(R.id.tv_nick_name1);
             tvNickName2 = (TextView) itemView.findViewById(R.id.tv_nick_name2);
             tvNickName3 = (TextView) itemView.findViewById(R.id.tv_nick_name3);
@@ -179,10 +197,6 @@ public class CamGirlListAdapter extends RecyclerView.Adapter {
             tvMoney2 = (TextView) itemView.findViewById(R.id.tv_money2);
             tvMoney3 = (TextView) itemView.findViewById(R.id.tv_money3);
             tvMoney4 = (TextView) itemView.findViewById(R.id.tv_money4);
-            ibtn_join1 = (ImageButton) itemView.findViewById(R.id.ibtn_join1);
-            ibtn_join2 = (ImageButton) itemView.findViewById(R.id.ibtn_join2);
-            ibtn_join3 = (ImageButton) itemView.findViewById(R.id.ibtn_join3);
-            ibtn_join4 = (ImageButton) itemView.findViewById(R.id.ibtn_join4);
         }
 
     }

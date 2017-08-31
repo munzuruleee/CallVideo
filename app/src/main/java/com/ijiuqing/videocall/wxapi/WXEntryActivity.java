@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+
+import com.ijiuqing.videocall.R;
 import com.ijiuqing.videocall.base.AGApplication;
 import com.ijiuqing.videocall.model.OnLoginListener;
 import com.ijiuqing.videocall.model.UserLoginModel;
@@ -31,6 +33,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler,OnLo
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
         userLoginModel = new UserLoginImpl();
         //如果没回调onResp，八成是这句没有写
         AGApplication.getApi().handleIntent(getIntent(), this);
@@ -73,6 +76,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler,OnLo
     public void loginSuccess() {
         Intent intent = new Intent(WXEntryActivity.this, MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finish();
     }
 
@@ -80,6 +84,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler,OnLo
     public void loginFail() {
         Intent intent = new Intent(WXEntryActivity.this, LoginActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finish();
     }
 }

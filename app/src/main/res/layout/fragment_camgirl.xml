@@ -1,42 +1,93 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#323242"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#000000"
+    android:orientation="vertical"
     tools:context="com.ijiuqing.videocall.ui.CamGirlFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center_vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal"
+        android:background="@drawable/solid_search">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/icon_search_btn"/>
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/edit_search"
+            android:hint="只有你想不到的没有搜不到的"
+            android:textColor="#909193"
+            android:textColorHint="#909193"
+            android:maxLines="1"
+            android:textSize="11dp"
+            style="?android:attr/textViewStyle"
+            android:background="@null"
+            android:layout_weight="1"/>
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:textColor="@color/colorPrimary"
+            android:visibility="gone"
+            android:id="@+id/iv_search"
+            android:background="@drawable/btn_close"
+            android:layout_marginRight="10dp"
+            android:textSize="13sp"/>
+    </LinearLayout>
+
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srlEnableFooterTranslationContent="false"
-        android:id="@+id/refresh_layout">
-        <LinearLayout
+        app:srlEnableFooterTranslationContent="false">
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-        <android.support.v7.widget.SearchView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:queryHint="只有你想不到的没有我搜不到的！"
-            android:layout_margin="5dp"/>
+            android:layout_height="match_parent">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <Button
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="排行榜"/>
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="用券观看"/>
+                    android:text="下拉刷新加载更多..."
+                    android:textColor="@color/colorPrimary" />
             </LinearLayout>
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/cam_girl_list"/>
-        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+
+                <Button
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/shape_botton"
+                    android:text="排行榜" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/cam_girl_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+        </FrameLayout>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

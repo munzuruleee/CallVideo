@@ -6,5 +6,5 @@
     <!-- After you entered the App ID, remove <##> outside of Your App ID -->
     <!-- For formal released project, please use Dynamic Key
         http://docs.agora.io/en/user_guide/Component_and_Others/Dynamic_Key_User_Guide.html -->
-    <string name="private_app_id">f2b89e23b7ab4b0ba91fdffc7aca7d96</string>
+    <string name="private_app_id">54247a1e86df48c6943675dfbcffed34</string>
 </resources>

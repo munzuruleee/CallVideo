@@ -44,4 +44,7 @@ public class ConstantApp {
     public static final String LOGINFLAG = "LOGINFLAG";
     public static final String CREATETIME = "CREATETIME";
     public static final String MODIFYTIME = "MODIFYTIME";
+    public static final String ROOMNUM = "ROOMNUM";
+    public static final String LINKNAME = "LINKNAME";
+    public static final String CHANNEL = "CHANNEL";
 }

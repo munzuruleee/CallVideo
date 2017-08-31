@@ -8,4 +8,6 @@ import android.content.Context;
 
 public interface CamGirlListModel {
     void getCamGirList(Context context, OnGetCamGirListListener listener);
+
+    void getCamGirListForUid(Context context,String uid,OnGetCamGirListener listener);
 }

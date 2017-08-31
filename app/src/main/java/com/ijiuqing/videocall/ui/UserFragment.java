@@ -3,7 +3,9 @@ package com.ijiuqing.videocall.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,6 +38,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     private TextView tvTNum;
     private TextView tvID;
     private ImageView ivSex;
+    private NestedScrollView content;
 
     public UserFragment() {
         // Required empty public constructor
@@ -72,7 +75,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
 
     private void initView(View mView) {
         this.mView = mView;
-        FrameLayout content = (FrameLayout) mView.findViewById(R.id.content);
+        content = (NestedScrollView) mView.findViewById(R.id.nested_scrollview);
         ViewPrama.setMargins(content, 0, 0, 0, Constant.navigationHeight);
         ivHeadPortrait = (ImageView) mView.findViewById(R.id.head_portrait);
         tvNikeName = (TextView) mView.findViewById(R.id.nike_name);
@@ -85,7 +88,9 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(),VideoChatViewActivity.class));
+                Intent intent = new Intent(getContext(),VideoChatViewActivity.class);
+                intent.putExtra(ConstantApp.CHANNEL,"agora.io");
+                getContext().startActivity(intent);
             }
         });
         tragt.setOnClickListener(new View.OnClickListener() {

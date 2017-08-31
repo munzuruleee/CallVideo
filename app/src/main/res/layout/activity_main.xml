@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="#000000"
     tools:context=".ui.MainActivity">
     <FrameLayout
         android:id="@+id/content"
@@ -17,5 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="#00000000"
+        app:itemTextColor="#f5d454"
+        app:itemIconTint="#f5d454"
         app:menu="@menu/navigation" />
 </RelativeLayout>

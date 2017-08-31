@@ -9,7 +9,7 @@ import android.os.AsyncTask;
 public class CountDownTask extends AsyncTask<Void,Integer,Void> {
     private CountDownCallBack countDownCallBack;
     private int freeTime = 15;
-    private int PayTime = 15;
+    private int PayTime = 600;
     private boolean isFree = true;
     public CountDownTask(CountDownCallBack countDownCallBack) {
         this.countDownCallBack = countDownCallBack;

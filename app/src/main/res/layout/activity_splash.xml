@@ -4,10 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="#000000"
+    android:orientation="vertical"
     tools:context="com.ijiuqing.videocall.ui.SplashActivity">
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="70sp"
-        android:text="welcome"/>
+        android:background="@drawable/main_icon" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/icon_gugu" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/have_gugu" />
 </LinearLayout>

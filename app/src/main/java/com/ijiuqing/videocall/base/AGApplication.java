@@ -88,9 +88,9 @@ public class AGApplication extends Application {
         Log.d(TAG, pushService.getDeviceId());
         pushService.setLogLevel(CloudPushService.LOG_ERROR);
         String account = (String) SharedPreferencesUtils.getParam(getApplicationContext(), ConstantApp.ULID, "");
-//        if (!TextUtils.isEmpty(account)){
-            bindAccount("internet");
-//        }
+        if (!TextUtils.isEmpty(account)){
+            bindAccount(account);
+        }
     }
 
     public void bindAccount(String account) {

@@ -76,6 +76,10 @@ public class UserLoginImpl implements UserLoginModel {
 
     @Override
     public void onInitLogin(final Context context, final String uid, final OnLoginListener loginListener) {
+        if (TextUtils.isEmpty(uid)){
+            loginListener.loginFail();
+            return;
+        }
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 AppUrl.LOGIN, new Response.Listener<String>() {
             @Override

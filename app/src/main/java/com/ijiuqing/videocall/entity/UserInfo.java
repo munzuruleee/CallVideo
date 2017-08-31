@@ -15,7 +15,7 @@ public class UserInfo {
     private Object uiPassword;
     private String uiHeadimgurl;
     private String ulNickname;
-    private String ulMoney;
+    private String ulMoney = "100";
     private int ulSex;
     private String ulProvince;
     private String ulCity;
