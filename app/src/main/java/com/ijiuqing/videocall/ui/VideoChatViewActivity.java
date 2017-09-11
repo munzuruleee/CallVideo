@@ -131,15 +131,19 @@ public class VideoChatViewActivity extends BaseActivity implements CountDownCall
         if (suvLocal != null) {
             if (!isSwitchFlag) {
                 containerRemote.addView(suvLocal);
+                suvLocal.setZOrderOnTop(false);
             } else {
                 containerLocal.addView(suvLocal);
+                suvLocal.setZOrderOnTop(true);
             }
         }
         if (suvRemote != null) {
             if (!isSwitchFlag) {
                 containerLocal.addView(suvRemote);
+                suvRemote.setZOrderOnTop(true);
             } else {
                 containerRemote.addView(suvRemote);
+                suvRemote.setZOrderOnTop(false);
             }
         }
         isSwitchFlag = !isSwitchFlag;
@@ -271,7 +275,7 @@ public class VideoChatViewActivity extends BaseActivity implements CountDownCall
     // Tutorial Step 3
     private void setupLocalVideo() {
         suvLocal = RtcEngine.CreateRendererView(getBaseContext());
-        suvLocal.setZOrderMediaOverlay(true);
+//        suvLocal.setZOrderMediaOverlay(true);
         containerLocal.addView(suvLocal);
         mRtcEngine.setupLocalVideo(new VideoCanvas(suvLocal, VideoCanvas.RENDER_MODE_ADAPTIVE, 0));
         yuvEnhancer.StartPreProcess();

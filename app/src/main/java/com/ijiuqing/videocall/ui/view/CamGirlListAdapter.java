@@ -73,7 +73,7 @@ public class CamGirlListAdapter extends RecyclerView.Adapter {
         }
         if (sizeList > 0) {
             myHolder.linPosition1.setVisibility(View.VISIBLE);
-            ImageLoader.getInstance().displayImage(mList.get(0).getUiHeadimgurl(), myHolder.ivImg1);
+            ImageLoader.getInstance().displayImage(mList.get(0).getUiHeadimgurl(), myHolder.ivImg1,AGApplication.options);
             myHolder.tvNickName1.setText(mList.get(0).getUlNickname());
             myHolder.tvMoney1.setText(mList.get(0).getUlMoney());
             myHolder.ivImg1.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +87,7 @@ public class CamGirlListAdapter extends RecyclerView.Adapter {
         }
         if (sizeList > 1) {
             myHolder.linPosition2.setVisibility(View.VISIBLE);
-            ImageLoader.getInstance().displayImage(mList.get(1).getUiHeadimgurl(), myHolder.ivImg2);
+            ImageLoader.getInstance().displayImage(mList.get(1).getUiHeadimgurl(), myHolder.ivImg2,AGApplication.options);
             myHolder.tvNickName2.setText(mList.get(1).getUlNickname());
             myHolder.tvMoney2.setText(mList.get(1).getUlMoney());
             myHolder.ivImg2.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +101,7 @@ public class CamGirlListAdapter extends RecyclerView.Adapter {
         }
         if (sizeList > 2) {
             myHolder.linPosition3.setVisibility(View.VISIBLE);
-            ImageLoader.getInstance().displayImage(mList.get(2).getUiHeadimgurl(), myHolder.ivImg3);
+            ImageLoader.getInstance().displayImage(mList.get(2).getUiHeadimgurl(), myHolder.ivImg3,AGApplication.options);
             myHolder.tvNickName3.setText(mList.get(2).getUlNickname());
             myHolder.tvMoney3.setText(mList.get(2).getUlMoney());
             myHolder.ivImg3.setOnClickListener(new View.OnClickListener() {
@@ -115,7 +115,7 @@ public class CamGirlListAdapter extends RecyclerView.Adapter {
         }
         if (sizeList > 3) {
             myHolder.linPosition4.setVisibility(View.VISIBLE);
-            ImageLoader.getInstance().displayImage(mList.get(3).getUiHeadimgurl(), myHolder.ivImg4);
+            ImageLoader.getInstance().displayImage(mList.get(3).getUiHeadimgurl(), myHolder.ivImg4,AGApplication.options);
             myHolder.tvNickName4.setText(mList.get(3).getUlNickname());
             myHolder.tvMoney4.setText(mList.get(3).getUlMoney());
             myHolder.ivImg4.setOnClickListener(new View.OnClickListener() {

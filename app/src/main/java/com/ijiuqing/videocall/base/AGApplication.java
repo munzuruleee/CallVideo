@@ -10,6 +10,7 @@ import com.alibaba.sdk.android.push.CommonCallback;
 import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.ijiuqing.videocall.R;
 import com.ijiuqing.videocall.common.ConstantApp;
 import com.ijiuqing.videocall.util.SharedPreferencesUtils;
 import com.ijiuqing.videocall.work.WorkerThread;
@@ -20,6 +21,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -32,6 +34,15 @@ public class AGApplication extends Application {
     private static AGApplication agApplication = null;
     public static RequestQueue mQueue;
     public static CloudPushService pushService;
+    public static DisplayImageOptions options = new DisplayImageOptions.Builder()
+            .showImageOnLoading(R.drawable.shape_corner_inside)            //加载图片时的图片
+            .showImageForEmptyUri(R.drawable.shape_corner_inside)         //没有图片资源时的默认图片
+            .showImageOnFail(R.drawable.shape_corner_inside)              //加载失败时的图片
+            .cacheInMemory(true)                               //启用内存缓存
+            .cacheOnDisk(true)                                 //启用外存缓存
+            .considerExifParams(true)                          //启用EXIF和JPEG图像格式
+            .displayer(new RoundedBitmapDisplayer(20))         //设置显示风格这里是圆角矩形
+            .build();
     public static AGApplication getApplication() {
         return agApplication;
     }
